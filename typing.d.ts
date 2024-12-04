@@ -16,3 +16,15 @@ export type NavigationLinks = {
   text: string;
   routeTo: string;
 };
+
+export type DynamicTextProps = {
+  subheading: string;
+  heading: string;
+};
+
+export type AboutUs = {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+};

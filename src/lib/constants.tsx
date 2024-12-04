@@ -1,7 +1,7 @@
 import React from "react";
 import { CiMobile3 } from "react-icons/ci";
 import { IoMailOpenOutline } from "react-icons/io5";
-import { Contact, NavigationLinks, SocialMedia } from "../../typing";
+import { AboutUs, Contact, NavigationLinks, SocialMedia } from "../../typing";
 
 export const contact: Contact[] = [
   {
@@ -29,4 +29,28 @@ export const navigationLinks: NavigationLinks[] = [
   { id: 2, text: "About", routeTo: "/about" },
   { id: 3, text: "Services", routeTo: "/services" },
   { id: 4, text: "Contact", routeTo: "/contact" },
+];
+
+export const aboutUs: AboutUs[] = [
+  {
+    id: 1,
+    image: "./home/about-1.jpg",
+    title: "Restaurant",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
+  },
+  {
+    id: 2,
+    image: "./home/about-2.jpg",
+    title: "Cocktail Bar",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
+  },
+  {
+    id: 3,
+    image: "./home/about-3.jpg",
+    title: "Private Dining",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
+  },
 ];

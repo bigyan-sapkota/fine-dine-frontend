@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
+  }
+
+  h2 {
+    @apply scroll-m-20 text-3xl font-semibold tracking-tight lg:text-4xl;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl;
+  }
+
+  h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight lg:text-2xl;
+  }
+
+  h5 {
+    @apply scroll-m-20 text-lg font-semibold tracking-tight lg:text-xl;
+  }
+
+  h6 {
+    @apply scroll-m-20 font-semibold tracking-tight lg:text-lg;
+  }
+}
+
 @layer utilities {
   .custom-transition {
     @apply transition-all duration-300;
@@ -9,5 +35,9 @@
 
   .section-padding-x {
     @apply px-20;
+  }
+
+  .section-margin-y {
+    @apply my-14;
   }
 }
