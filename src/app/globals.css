@@ -38,6 +38,10 @@
   }
 
   .section-margin-y {
-    @apply my-14;
+    @apply my-28;
   }
+}
+
+.custom-shadow {
+  box-shadow: 5px 5px 20px 5px #00000021;
 }

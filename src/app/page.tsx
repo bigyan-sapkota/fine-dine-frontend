@@ -1,19 +1,19 @@
-import Footer from "@/components/layout/footer";
-import Navbar from "@/components/layout/navbar";
 import AboutFinedine from "@/components/pages/home/about-finedine";
+import FollowInsta from "@/components/pages/home/follow-insta";
 import HeroBanner from "@/components/pages/home/hero-banner";
 
 export default function Page() {
   return (
     <div>
-      <Navbar />
       <HeroBanner />
 
       <div className="section-margin-y ">
         <AboutFinedine />
       </div>
 
-      <Footer />
+      <div className="section-margin-y">
+        <FollowInsta />
+      </div>
     </div>
   );
 }

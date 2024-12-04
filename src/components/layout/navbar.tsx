@@ -37,12 +37,12 @@ export default function Navbar() {
         </div>
 
         {/* login register text */}
-        <div className="flex items-center gap-2">
+        <Link href="/login" className="flex items-center gap-2">
           <IoPersonCircleOutline className="text-3xl" />
           <p className="font-bold hover:text-primary custom-transition hover:cursor-pointer">
             Login / Register
           </p>
-        </div>
+        </Link>
       </div>
 
       {/* bottom part */}
