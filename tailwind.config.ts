@@ -14,6 +14,7 @@ export default {
 
         text: {
           primary: "#000101",
+          secondary: "#868787",
         },
       },
     },
