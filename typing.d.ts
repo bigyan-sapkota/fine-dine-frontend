@@ -28,3 +28,14 @@ export type AboutUs = {
   title: string;
   description: string;
 };
+
+export type FooterColumn = {
+  id: number;
+  text: string;
+  routeTo: string;
+};
+
+export type FooterService = {
+  id: number;
+  text: string;
+};
