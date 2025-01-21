@@ -16,7 +16,7 @@ export default function Footer() {
       {/* top footer */}
       <div className="flex justify-between py-10">
         {/* logo and text */}
-        <div className="bg-primary w-[30%] p-10 rounded-3xl">
+        <div className="bg-secondary w-[30%] p-10 rounded-3xl">
           {/* logo */}
           <Link href="/">
             <p className="text-3xl font-extrabold tracking-wider text-white">

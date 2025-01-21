@@ -1,3 +1,6 @@
+"use client";
+import { BACKEND_URL } from "@/lib/constants";
+
 export default function Page() {
   return (
     <section
@@ -22,7 +25,11 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="flex items-center gap-10 py-6 h-full">
+        <a
+          className="flex items-center gap-10 py-6 h-full"
+          href={`${BACKEND_URL}/api/auth/login/google?redirect=${location.origin}`}
+          target="_blank"
+        >
           <img
             src="./login/login-right-2.jpg"
             alt=""
@@ -33,7 +40,7 @@ export default function Page() {
             alt=""
             className="h-full w-52 object-cover rounded-[70px]"
           />
-        </div>
+        </a>
       </div>
     </section>
   );

@@ -11,10 +11,12 @@ export default function HeroBanner() {
     >
       <div>
         <div>
-          <h2 className="text-5xl text-white font-extrabold">Grilled Cheese</h2>
-          <h1 className="text-9xl font-extrabold text-secondary">Burger</h1>
+          <h2 className="text-5xl text-white font-extrabold">
+            Finedine : Test The Finest
+          </h2>
+          <h1 className="text-9xl font-extrabold text-secondary">Book Table</h1>
           <h4 className="font-bold text-white text-2xl mt-6">
-            Limited Time Offer
+            For your restaurant
           </h4>
         </div>
 
