@@ -5,8 +5,6 @@ import HeroBanner from "@/components/pages/home/hero-banner";
 import { useProfile } from "@/queries/use-profile";
 
 export default function Page() {
-  const { data, isLoading, isError } = useProfile();
-  console.log(data, isLoading, isError);
   return (
     <div>
       <HeroBanner />

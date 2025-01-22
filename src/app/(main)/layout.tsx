@@ -1,11 +1,11 @@
-import Footer from "@/components/layout/footer";
-import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layouts/footer";
+import Header from "@/components/layouts/header";
 import React from "react";
 
 const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
-      <Navbar />
+      <Header />
       {children}
       <Footer />
     </>

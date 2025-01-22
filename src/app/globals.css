@@ -26,6 +26,9 @@
   h6 {
     @apply scroll-m-20 font-semibold tracking-tight lg:text-lg;
   }
+  :root {
+    --radius: 0.5rem;
+  }
 }
 
 @layer utilities {

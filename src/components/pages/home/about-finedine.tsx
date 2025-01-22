@@ -1,4 +1,4 @@
-import DynamicText from "@/components/layout/dynamic-text";
+import DynamicText from "@/components/layouts/dynamic-text";
 import { aboutUs } from "@/lib/constants";
 import React from "react";
 

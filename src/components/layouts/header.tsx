@@ -1,10 +1,26 @@
+"use client";
 import { contact, navigationLinks, socialMedia } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { useProfile } from "@/queries/use-profile";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import ProfileDropdown from "../dropdowns/profile-dropdown";
+import Avatar from "@/components/utils/avatar";
 
 export default function Navbar() {
+  const { data: profile, isLoading: isLoadingProfile } = useProfile();
+  const pathname = usePathname();
   return (
-    <div>
+    <div
+      className={cn(
+        "left-0 top-0 z-10 h-36 w-full border-b bg-white/70 filter backdrop-blur-2xl",
+        {
+          fixed: pathname === "/",
+          sticky: pathname !== "/",
+        }
+      )}
+    >
       {/* top part */}
       <div className="bg-secondary py-3 section-padding-x lg:flex items-center justify-between hidden">
         {/* contact details */}
@@ -37,12 +53,32 @@ export default function Navbar() {
         </div>
 
         {/* login register text */}
-        <Link href="/login" className="flex items-center gap-2">
-          <IoPersonCircleOutline className="text-3xl" />
-          <p className="font-bold hover:text-primary custom-transition hover:cursor-pointer">
-            Login / Register
-          </p>
-        </Link>
+        {!profile && !isLoadingProfile && (
+          <Link href="/login" className="flex items-center gap-2">
+            <IoPersonCircleOutline className="text-3xl" />
+            <p className="font-bold hover:text-primary custom-transition hover:cursor-pointer">
+              Login / Register
+            </p>
+          </Link>
+        )}
+
+        {profile && (
+          <div className="flex items-center space-x-1.5 text-sm">
+            <div className="hidden sm:inline">
+              <span className="mr-1">Welcome, </span>
+              <span className="font-bold">{profile.name.split(" ")[0]}</span>
+            </div>
+            <ProfileDropdown>
+              <button>
+                <Avatar
+                  src={profile.image}
+                  variant="lg"
+                  className="border-white border-2 rounded-full p-0.5"
+                />
+              </button>
+            </ProfileDropdown>
+          </div>
+        )}
       </div>
 
       {/* bottom part */}

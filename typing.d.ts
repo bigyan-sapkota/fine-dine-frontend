@@ -45,3 +45,11 @@ type UserProfile = User & {
   lastNotificationReadAt: string;
   totalUnreadNotifications: number;
 };
+
+type NotificationResult = {
+  id: string;
+  user: string;
+  title: string;
+  description: string | null;
+  receivedAt: string;
+};
