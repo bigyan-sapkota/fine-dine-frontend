@@ -53,3 +53,11 @@ type NotificationResult = {
   description: string | null;
   receivedAt: string;
 };
+
+type Table = {
+  id: string;
+  tag: string;
+  attribute: string;
+  capacity: numer;
+  available: boolean;
+};

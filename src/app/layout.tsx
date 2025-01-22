@@ -5,6 +5,7 @@ import Navbar from "@/components/layouts/header";
 import Footer from "@/components/layouts/footer";
 import QueryProvider from "@/providers/query-provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           {children}
+          <Toaster
+            toastOptions={{ duration: 3000 }}
+            theme="dark"
+            richColors
+            closeButton
+          />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryProvider>
       </body>
