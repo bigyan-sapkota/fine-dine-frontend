@@ -61,3 +61,12 @@ type Table = {
   capacity: numer;
   available: boolean;
 };
+
+type Booking = {
+  id: string;
+  user: UserProfile;
+  table: Table;
+  startsAt: string;
+  endsAt: string;
+  isCancelled: boolean;
+};
