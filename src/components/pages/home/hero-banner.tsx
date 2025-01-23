@@ -4,7 +4,7 @@ import React from "react";
 export default function HeroBanner() {
   return (
     <section
-      className="h-[90vh] bg-no-repeat bg-cover section-padding-x flex items-center mt-36"
+      className="h-[90vh] bg-no-repeat bg-cover section-padding-x flex items-center mt-32"
       style={{
         backgroundImage: "url('./home/hero-1.jpg')",
       }}

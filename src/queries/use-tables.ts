@@ -29,7 +29,6 @@ const fetchTables = async ({
     );
     return res.data.tables;
   } catch (error) {
-    console.log(error);
     throw new Error(extractErrorMessage(error));
   }
 };

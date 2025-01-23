@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import ProfileDropdown from "../dropdowns/profile-dropdown";
 import Avatar from "@/components/utils/avatar";
+import { Skeleton } from "../ui/skeleton";
 
 export default function Navbar() {
   const { data: profile, isLoading: isLoadingProfile } = useProfile();
@@ -14,7 +15,7 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "left-0 top-0 z-10 h-36 w-full border-b bg-white/70 filter backdrop-blur-2xl",
+        "left-0 top-0 z-10 h-32 w-full bg-white/70 filter backdrop-blur-2xl border-b",
         {
           fixed: pathname === "/",
           sticky: pathname !== "/",
@@ -22,12 +23,12 @@ export default function Navbar() {
       )}
     >
       {/* top part */}
-      <div className="bg-secondary py-3 section-padding-x lg:flex items-center justify-between hidden">
+      <div className="bg-secondary h-12 section-padding-x lg:flex items-center justify-between hidden">
         {/* contact details */}
         <div className="flex items-center gap-4 ">
           {contact.map((item) => (
             <div className="flex items-center gap-0.5" key={item.id}>
-              <i className="bg-primary text-white p-2 text-xl rounded-full">
+              <i className="bg-primary text-white p-1.5 text-xl rounded-full">
                 {item.icon}
               </i>
               <a href={item.link} target="_blank" className="font-bold">
@@ -51,38 +52,10 @@ export default function Navbar() {
             </div>
           ))}
         </div>
-
-        {/* login register text */}
-        {!profile && !isLoadingProfile && (
-          <Link href="/login" className="flex items-center gap-2">
-            <IoPersonCircleOutline className="text-3xl" />
-            <p className="font-bold hover:text-primary custom-transition hover:cursor-pointer">
-              Login / Register
-            </p>
-          </Link>
-        )}
-
-        {profile && (
-          <div className="flex items-center space-x-1.5 text-sm">
-            <div className="hidden sm:inline">
-              <span className="mr-1">Welcome, </span>
-              <span className="font-bold">{profile.name.split(" ")[0]}</span>
-            </div>
-            <ProfileDropdown>
-              <button>
-                <Avatar
-                  src={profile.image}
-                  variant="lg"
-                  className="border-white border-2 rounded-full p-0.5"
-                />
-              </button>
-            </ProfileDropdown>
-          </div>
-        )}
       </div>
 
       {/* bottom part */}
-      <div className="flex items-center section-padding-x py-4 justify-between">
+      <div className="flex items-center section-padding-x pt-5 justify-between">
         {/* logo */}
         <Link href="/">
           <p className="text-3xl font-extrabold tracking-wider">
@@ -101,11 +74,37 @@ export default function Navbar() {
 
         {/* button */}
         <div>
-          <Link href="/reserve-a-table">
-            <button className="bg-primary text-white px-8 py-4 rounded-xl font-bold">
-              Reserve A Table
-            </button>
-          </Link>
+          {/* login register text */}
+          {!profile && !isLoadingProfile && (
+            <Link href="/login" className="flex items-center gap-2">
+              <IoPersonCircleOutline className="text-3xl" />
+              <p className="font-bold hover:text-primary custom-transition hover:cursor-pointer">
+                Login / Register
+              </p>
+            </Link>
+          )}
+
+          {isLoadingProfile && (
+            <Skeleton className="h-10 w-24 lg:w-44"></Skeleton>
+          )}
+
+          {profile && (
+            <div className="flex items-center space-x-1.5 text-sm">
+              <div className="hidden sm:inline">
+                <span className="mr-1">Welcome, </span>
+                <span className="font-bold">{profile.name.split(" ")[0]}</span>
+              </div>
+              <ProfileDropdown>
+                <button>
+                  <Avatar
+                    src={profile.image}
+                    variant="lg"
+                    className="border-white border-2 rounded-full p-0.5 shadow"
+                  />
+                </button>
+              </ProfileDropdown>
+            </div>
+          )}
         </div>
       </div>
     </div>

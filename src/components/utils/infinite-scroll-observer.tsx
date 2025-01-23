@@ -1,15 +1,14 @@
 import { cn } from "@/lib/utils";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 type Props = {
   isFetching: boolean;
   hasNextPage: boolean;
-  fetchNextPage: () => boolean;
+  fetchNextPage: () => unknown;
   className?: string;
   showLoader?: boolean;
 };
-
 export default function InfiniteScrollObserver({
   fetchNextPage,
   hasNextPage,
@@ -39,7 +38,7 @@ export default function InfiniteScrollObserver({
 
   return (
     <>
-      <span ref={observerRef}></span>
+      <span ref={observerRef} />
       {isFetching && hasNextPage && showLoader && (
         <div className="grid w-full place-items-center">
           <Loader2 className={cn("size-4 animate-spin", className)} />

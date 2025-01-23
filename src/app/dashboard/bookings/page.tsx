@@ -20,7 +20,6 @@ import moment from "moment";
 import Avatar from "@/components/utils/avatar";
 import { useAdminBookings } from "@/mutations/use-admin-booking";
 import { Skeleton } from "@/components/ui/skeleton";
-import { error } from "console";
 import ErrorMessage from "@/components/layouts/error-message";
 
 const BookingsTable = () => {
