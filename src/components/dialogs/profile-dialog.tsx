@@ -20,13 +20,10 @@ export default function ProfileDialog({
   children: React.ReactNode;
 }) {
   const { data: profile } = useProfile();
-
   if (!profile) return null;
-
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
-
       <DialogContent onKeyDown={(e) => e.stopPropagation()}>
         <DialogHeader>
           <DialogTitle className="text-center">Your Profile</DialogTitle>
@@ -34,12 +31,12 @@ export default function ProfileDialog({
 
         <section>
           <Avatar src={profile.image} variant="xl" />
-          <p className="font-semibold mt-1">{profile.name}</p>
-          <div className="flex items-center my-1">
+          <p className="font-semibold">{profile.name}</p>
+          <div className="flex items-center">
             <Mail className="mr-2 size-4" /> <span>{profile.email}</span>
           </div>
           <div className="flex items-center">
-            <User className="mr-2 size-4" />
+            <User className="mr-2 size-4" />{" "}
             <span>
               <span>Role - </span> {profile.role}
             </span>

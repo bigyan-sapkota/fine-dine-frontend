@@ -55,7 +55,7 @@ type NotificationResult = {
 };
 
 type Table = {
-  id: string;
+  _id: string;
   tag: string;
   attribute: string;
   capacity: numer;

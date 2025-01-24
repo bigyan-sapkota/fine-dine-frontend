@@ -27,12 +27,12 @@ const useUpdateProfileDialog = createStore<{ isOpen: boolean }>(() => ({
 
 const onOpenChange = (isOpen: boolean) =>
   useUpdateProfileDialog.setState({ isOpen });
+
 export const openUpdateProfileDialog = () => onOpenChange(true);
 export const closeUpdateProfileDialog = () => onOpenChange(false);
 
 export default function UpdateProfileDialog() {
   const { data: profile } = useProfile();
-
   if (!profile) return;
 
   return <BaseDialog />;
@@ -86,7 +86,7 @@ function BaseDialog() {
             Icon={User}
             id="name"
             label="Name"
-            placeholder="Bigyan Sapkota..."
+            placeholder="Ayushma Dhungana..."
             {...register("name")}
             error={errors.name?.message}
           />

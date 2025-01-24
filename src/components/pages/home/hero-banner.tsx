@@ -22,7 +22,7 @@ export default function HeroBanner() {
 
         {/* button */}
         <div className="mt-6">
-          <Link href="/reserve-a-table">
+          <Link href="/reserve-table">
             <button className="bg-primary text-white px-8 py-4 rounded-xl font-bold">
               Reserve A Table
             </button>

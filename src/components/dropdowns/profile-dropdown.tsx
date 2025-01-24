@@ -22,7 +22,7 @@ export default function ProfileDropdown({ children }: Props) {
   if (!profile) return null;
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-44">

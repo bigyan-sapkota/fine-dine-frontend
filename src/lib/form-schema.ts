@@ -20,3 +20,22 @@ export const addTableSchema = z.object({
 
 export type AddTableSchema = z.infer<typeof addTableSchema>;
 export type UpdateTableSchema = Partial<AddTableSchema>;
+
+const bookingSchema = z.object({
+  date: z
+    .date({ required_error: "Date is required" })
+    .min(new Date(), "Cannot book for a past date"),
+  time: z
+    .string()
+    .refine(
+      (val) => /^(\d{1,2}):(00|15|30|45)$/.test(val),
+      "Time must be in x:00, x:15, x:30, or x:45 format"
+    ),
+  hours: z.number().min(1, "Minimum booking time is 1 hour"),
+  people: z
+    .number()
+    .min(1, "At least 1 person is required")
+    .max(20, "Maximum 20 people allowed"),
+});
+
+type BookingForm = z.infer<typeof bookingSchema>;
