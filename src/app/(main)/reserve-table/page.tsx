@@ -5,7 +5,7 @@ import { useProfile } from "@/queries/use-profile";
 
 import { useAvailableTables } from "@/queries/use-available-tables";
 import { useIsMutating } from "@tanstack/react-query";
-import { bookTableKey } from "@/mutations/use-book-table";
+import { bookTableKey, useBookTable } from "@/mutations/use-book-table";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -32,6 +32,7 @@ type CalendarDate = Date | null | [Date | null, Date | null];
 
 const Page = () => {
   const { data: user } = useProfile();
+  const { mutate } = useBookTable();
 
   const [date, onChange] = useState<Date | undefined>(new Date());
   const [capacity, setCapacity] = useState<number>(1);
@@ -62,7 +63,7 @@ const Page = () => {
     setSelectedTables(null);
   }, [availableTables, fullDate]);
 
-  const canSelectTable = date && time && (selectedTables?.length || 0) > 0;
+  const canSelectTable = date && time && capacity;
   const isBookingTable = !!useIsMutating({ mutationKey: bookTableKey });
   const disabled =
     !((selectedTables?.length || 0) > 0) || !time || !date || isBookingTable;
@@ -165,7 +166,7 @@ const Page = () => {
             <div className="flex items-center gap-3 rounded-md border border-yellow-400 bg-yellow-100 p-4 text-yellow-800">
               <AlertCircle className="h-5 w-5" />
               <span className="text-sm font-medium">
-                Select the service and date first to select the staff
+                Select the capacity, time and date first to book table
               </span>
             </div>
           )}
@@ -218,7 +219,18 @@ const Page = () => {
           >
             Cancel
           </Button>
-          <Button disabled={disabled} loading={isBookingTable}>
+          <Button
+            disabled={disabled}
+            loading={isBookingTable}
+            onClick={() =>
+              mutate({
+                tableIds: selectedTables!,
+                startsAt: date?.toISOString() || "",
+                userId: user._id,
+                hours: time,
+              })
+            }
+          >
             Reserve Table
           </Button>
         </div>
