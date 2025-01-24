@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import Avatar from "@/components/utils/avatar";
 import { useProfile } from "@/queries/use-profile";
-import { Mail, MapPin, Phone, User } from "lucide-react";
+import { Mail, User } from "lucide-react";
 import React from "react";
 import { openUpdateProfileDialog } from "./update-profile-dialog";
 

@@ -6,6 +6,7 @@ import { Table } from "../../typing";
 import axios from "axios";
 import { BACKEND_URL } from "@/lib/constants";
 import { tableKey } from "@/queries/use-tables";
+import { extractErrorMessage } from "@/lib/utils";
 
 export const updateTableKey = (id: string) => ["update-table", id];
 
@@ -35,14 +36,15 @@ export const useUpdateTable = (id: string) => {
   });
 };
 
-type Options = { message: string } & UpdateTableSchema;
 const updateTable = async (id: string, data: UpdateTableSchema) => {
   try {
     const res = await axios.put<{ table: Table }>(
       `${BACKEND_URL}/api/tables/${id}`,
       data,
-      { withCredentials: true }
+      { withCredentials: true },
     );
     return res.data.table;
-  } catch (error) {}
+  } catch (error) {
+    throw new Error(extractErrorMessage(error));
+  }
 };

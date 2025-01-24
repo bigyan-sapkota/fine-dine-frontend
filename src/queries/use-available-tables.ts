@@ -37,6 +37,7 @@ const fetchAvailableTables = async ({ signal, date, hours, tag }: Options) => {
 
     const res = await axios.get<{ tables: Table[] }>(url, {
       withCredentials: true,
+      signal,
     });
     return res.data.tables;
   } catch (error) {

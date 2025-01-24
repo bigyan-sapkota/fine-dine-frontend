@@ -1,27 +1,17 @@
 import { useNotifications } from "@/queries/use-notifications";
-import {
-  Bell,
-  BookText,
-  CircleAlert,
-  ShieldCheck,
-  ShieldEllipsis,
-  User,
-} from "lucide-react";
+import { Bell, CircleAlert } from "lucide-react";
 import moment from "moment";
 import React from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
 import { Skeleton } from "../ui/skeleton";
 
-import InfiniteScrollObserver from "../utils/infinite-scroll-observer";
 import { NotificationResult } from "../../../typing";
 
 export default function NotificationsDrawer({
@@ -29,8 +19,7 @@ export default function NotificationsDrawer({
 }: {
   children: React.ReactNode;
 }) {
-  const { data, isFetching, fetchNextPage, hasNextPage, error, isLoading } =
-    useNotifications();
+  const { data, error, isLoading } = useNotifications();
   const notifications = data?.pages.flat(1) || [];
 
   return (
@@ -41,7 +30,7 @@ export default function NotificationsDrawer({
           <DrawerTitle className="text-center">Notifications</DrawerTitle>
         </DrawerHeader>
 
-        <div className="h-full space-y-3 overflow-y-auto scrollbar-thin">
+        <div className="scrollbar-thin h-full space-y-3 overflow-y-auto">
           {error && (
             <div className="p-4">
               <Alert className="" variant="destructive">

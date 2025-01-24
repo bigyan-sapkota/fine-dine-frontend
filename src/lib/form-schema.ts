@@ -14,14 +14,14 @@ export const addTableSchema = z.object({
     z
       .number({ required_error: "Capacity is required" })
       .min(1, "Table can't have capacity less than 1")
-      .max(12, "Table can't have capacity more than 12")
+      .max(12, "Table can't have capacity more than 12"),
   ),
 });
 
 export type AddTableSchema = z.infer<typeof addTableSchema>;
 export type UpdateTableSchema = Partial<AddTableSchema>;
 
-const bookingSchema = z.object({
+export const bookingSchema = z.object({
   date: z
     .date({ required_error: "Date is required" })
     .min(new Date(), "Cannot book for a past date"),
@@ -29,7 +29,7 @@ const bookingSchema = z.object({
     .string()
     .refine(
       (val) => /^(\d{1,2}):(00|15|30|45)$/.test(val),
-      "Time must be in x:00, x:15, x:30, or x:45 format"
+      "Time must be in x:00, x:15, x:30, or x:45 format",
     ),
   hours: z.number().min(1, "Minimum booking time is 1 hour"),
   people: z
@@ -38,4 +38,4 @@ const bookingSchema = z.object({
     .max(20, "Maximum 20 people allowed"),
 });
 
-type BookingForm = z.infer<typeof bookingSchema>;
+export type BookingForm = z.infer<typeof bookingSchema>;

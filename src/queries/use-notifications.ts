@@ -27,13 +27,13 @@ const fetchNotifications = async ({
 }): Promise<NotificationResult[]> => {
   try {
     const url = new URL(`${BACKEND_URL}/api/notifications`);
-    cursor && url.searchParams.set("cursor", cursor);
+    if (cursor) url.searchParams.set("cursor", cursor);
     const res = await axios.get<{ notifications: NotificationResult[] }>(
       url.href,
       {
         withCredentials: true,
         signal,
-      }
+      },
     );
     return res.data.notifications;
   } catch (error) {

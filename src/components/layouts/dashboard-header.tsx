@@ -1,14 +1,13 @@
 "use client";
-import { useProfile } from "@/queries/use-profile";
-import { usePathname } from "next/navigation";
-import { dashboardLinks } from "./dashboard-sidebar";
-import { cn } from "@/lib/utils";
 import { poppins } from "@/lib/fonts";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { useProfile } from "@/queries/use-profile";
+import { Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+import DashboardMenuDrawer from "../drawers/dashboard-menu-drawer";
 import ProfileDropdown from "../dropdowns/profile-dropdown";
 import Avatar from "../utils/avatar";
-import DashboardMenuDrawer from "../drawers/dashboard-menu-drawer";
-import { Menu } from "lucide-react";
+import { dashboardLinks } from "./dashboard-sidebar";
 
 export default function DashboardHeader() {
   const pathname = usePathname();
@@ -21,7 +20,7 @@ export default function DashboardHeader() {
     <header
       className={cn(
         poppins.className,
-        "sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white/80 px-4 text-sm filter backdrop-blur-2xl"
+        "sticky top-0 z-30 flex h-16 items-center justify-between border-b bg-white/80 px-4 text-sm filter backdrop-blur-2xl",
       )}
     >
       <h3 className="hidden text-lg font-semibold lg:block">

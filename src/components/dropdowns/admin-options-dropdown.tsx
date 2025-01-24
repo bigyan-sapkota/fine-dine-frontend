@@ -5,10 +5,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
-import { ShieldCheck, CircleUser } from "lucide-react";
-import { UserProfile } from "../../../typing";
 import { useUpdateUserAdmin } from "@/mutations/use-update-user-admin";
+import { CircleUser } from "lucide-react";
+import { toast } from "sonner";
+import { UserProfile } from "../../../typing";
 
 type Props = {
   admin: UserProfile;

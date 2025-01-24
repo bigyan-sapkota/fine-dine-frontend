@@ -1,12 +1,10 @@
 import { BACKEND_URL } from "@/lib/constants";
 import { getQueryClient } from "@/lib/query-client";
 import { extractErrorMessage } from "@/lib/utils";
+import { adminsKey } from "@/queries/use-admins";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { UserProfile } from "../../typing";
-import { usersKey } from "@/queries/use-search-users";
-import { toast } from "sonner";
-import { adminsKey } from "@/queries/use-admins";
 
 export const updateUserKey = (id: string) => ["update-user", id];
 
@@ -30,7 +28,7 @@ export const useUpdateUserAdmin = (id: string) => {
       });
 
       updatedAdminsData = updatedAdminsData.filter(
-        (admin) => admin.role !== "user"
+        (admin) => admin.role !== "user",
       );
 
       queryClient.setQueryData<UserProfile[]>(adminsKey, updatedAdminsData);

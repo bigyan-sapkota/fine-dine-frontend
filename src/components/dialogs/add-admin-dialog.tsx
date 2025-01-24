@@ -11,20 +11,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useDebounce } from "@/hooks/use-debounce";
-import { useState } from "react";
-import InfiniteScrollObserver from "../utils/infinite-scroll-observer";
-import { AutoAnimate } from "@jodd/auto-animate";
-import { Skeleton } from "../ui/skeleton";
-import { UserProfile } from "../../../typing";
 import {
-  updateUser,
   updateUserKey,
   useUpdateUserAdmin,
 } from "@/mutations/use-update-user-admin";
-import { useIsMutating } from "@tanstack/react-query";
 import { useAdmins } from "@/queries/use-admins";
-import Avatar from "../utils/avatar";
 import { useUsers } from "@/queries/use-search-users";
+import { AutoAnimate } from "@jodd/auto-animate";
+import { useIsMutating } from "@tanstack/react-query";
+import { useState } from "react";
+import { UserProfile } from "../../../typing";
+import { Skeleton } from "../ui/skeleton";
+import Avatar from "../utils/avatar";
+import InfiniteScrollObserver from "../utils/infinite-scroll-observer";
 
 export default function AddAdminDialog({
   children,
@@ -47,7 +46,7 @@ export default function AddAdminDialog({
           <DialogTitle className="text-center">Add new admin</DialogTitle>
         </DialogHeader>
 
-        <section className="flex h-full flex-col overflow-y-auto px-2 scrollbar-hide">
+        <section className="scrollbar-hide flex h-full flex-col overflow-y-auto px-2">
           <div className="space-y-2.5 pr-2">
             <Label id="search">Search users</Label>
             <Input
@@ -64,7 +63,7 @@ export default function AddAdminDialog({
             </div>
           </div>
 
-          <AutoAnimate className="mt-3 flex h-full flex-col space-y-2 overflow-y-auto overflow-x-hidden pr-1 scrollbar-thin">
+          <AutoAnimate className="scrollbar-thin mt-3 flex h-full flex-col space-y-2 overflow-y-auto overflow-x-hidden pr-1">
             {(isLoading || !enabled) &&
               new Array(5).fill("nothing").map((item, i) => (
                 <div key={i} className="w-full">

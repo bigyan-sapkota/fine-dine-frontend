@@ -88,7 +88,7 @@ export default function AddTableDialog({ children, mode, table }: Props) {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-grow flex-col space-y-2 overflow-y-auto px-2 scrollbar-thin"
+          className="scrollbar-thin flex flex-grow flex-col space-y-2 overflow-y-auto px-2"
         >
           <div className="flex flex-grow flex-col space-y-5">
             <FormInput

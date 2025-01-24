@@ -18,7 +18,7 @@ import { useProfile } from "@/queries/use-profile";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createStore } from "@jodd/snap";
 import { useIsMutating } from "@tanstack/react-query";
-import { MapPin, Phone, User } from "lucide-react";
+import { User } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 const useUpdateProfileDialog = createStore<{ isOpen: boolean }>(() => ({

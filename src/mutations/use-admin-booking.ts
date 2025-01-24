@@ -36,9 +36,10 @@ const fetchBookings = async ({
 }: Options): Promise<Booking[]> => {
   try {
     const url = new URL(`${BACKEND_URL}/api/bookings`);
-    cursor && url.searchParams.set("cursor", cursor);
-    userId && url.searchParams.set("userId", userId);
-    isCancelled && url.searchParams.set("isCancelled", isCancelled.toString());
+    if (cursor) url.searchParams.set("cursor", cursor);
+    if (userId) url.searchParams.set("userId", userId);
+    if (isCancelled)
+      url.searchParams.set("isCancelled", isCancelled.toString());
     const res = axios.get<{ bookings: Booking[] }>(url.href, {
       signal,
       withCredentials: true,

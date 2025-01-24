@@ -1,24 +1,21 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
-import { Table } from "../../../../typing";
 import { useProfile } from "@/queries/use-profile";
+import { useEffect, useMemo, useState } from "react";
 
-import { useAvailableTables } from "@/queries/use-available-tables";
-import { useIsMutating } from "@tanstack/react-query";
-import { bookTableKey, useBookTable } from "@/mutations/use-book-table";
 import { Label } from "@/components/ui/label";
 import {
   Select,
-  SelectGroup,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { bookTableKey, useBookTable } from "@/mutations/use-book-table";
+import { useAvailableTables } from "@/queries/use-available-tables";
+import { useIsMutating } from "@tanstack/react-query";
 
-import { AlertCircle, CalendarIcon, Loader2 } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -26,9 +23,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { AlertCircle, CalendarIcon, Loader2 } from "lucide-react";
 import moment from "moment";
-
-type CalendarDate = Date | null | [Date | null, Date | null];
+import Image from "next/image";
 
 const Page = () => {
   const { data: user } = useProfile();
@@ -49,15 +46,12 @@ const Page = () => {
     return selectedDate.toISOString();
   }, [date, time]);
 
-  const {
-    data: availableTables,
-    isLoading: isAvailableTablesLoading,
-    refetch: refetchAvailableTables,
-  } = useAvailableTables({
-    date: fullDate,
-    hours: 1,
-    tag: "first floor",
-  });
+  const { data: availableTables, isLoading: isAvailableTablesLoading } =
+    useAvailableTables({
+      date: fullDate,
+      hours: 1,
+      tag: "first floor",
+    });
 
   useEffect(() => {
     setSelectedTables(null);

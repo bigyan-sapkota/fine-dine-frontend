@@ -33,7 +33,7 @@ export const useUpdateProfile = () => {
 };
 
 export const updateProfile = async (
-  data: Partial<UpdateProfileSchema>
+  data: Partial<UpdateProfileSchema>,
 ): Promise<UserProfile> => {
   try {
     const res = await axios.put<{ user: UserProfile }>(
@@ -41,8 +41,9 @@ export const updateProfile = async (
       data,
       {
         withCredentials: true,
-      }
+      },
     );
+    return res.data.user;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }

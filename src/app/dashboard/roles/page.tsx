@@ -1,18 +1,10 @@
 "use client";
 import AddAdminDialog from "@/components/dialogs/add-admin-dialog";
-import { Button } from "@/components/ui/button";
-import { useAdmins } from "@/queries/use-admins";
-import {
-  AlertCircle,
-  Dot,
-  EllipsisVertical,
-  Loader2,
-  Mail,
-  ShieldCheck,
-  UserRoundPlus,
-} from "lucide-react";
-import React from "react";
+import AdminProfileDialog from "@/components/dialogs/admin-profile-dailog";
+import AdminOptionsDropdown from "@/components/dropdowns/admin-options-dropdown";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -21,14 +13,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
-import { UserProfile } from "../../../../typing";
+import Avatar from "@/components/utils/avatar";
+import { updateUserKey } from "@/mutations/use-update-user-admin";
+import { useAdmins } from "@/queries/use-admins";
 import { useProfile } from "@/queries/use-profile";
 import { useIsMutating } from "@tanstack/react-query";
-import { updateUserKey } from "@/mutations/use-update-user-admin";
-import AdminProfileDialog from "@/components/dialogs/admin-profile-dailog";
-import Avatar from "@/components/utils/avatar";
-import AdminOptionsDropdown from "@/components/dropdowns/admin-options-dropdown";
+import {
+  AlertCircle,
+  EllipsisVertical,
+  Loader2,
+  Mail,
+  ShieldCheck,
+  UserRoundPlus,
+} from "lucide-react";
+import { UserProfile } from "../../../../typing";
 
 const Page = () => {
   const { data: admins, isLoading, error } = useAdmins();
@@ -45,7 +43,7 @@ const Page = () => {
         </AddAdminDialog>
       </section>
 
-      <div className="w-full max-w-full overflow-x-auto scrollbar-thin">
+      <div className="scrollbar-thin w-full max-w-full overflow-x-auto">
         {error && (
           <Alert variant="destructive" className="mt-2">
             <AlertCircle className="size-4" />
@@ -65,9 +63,7 @@ const Page = () => {
           </TableHeader>
 
           <TableBody className="font-medium">
-            {admins?.map((admin, i) => (
-              <Admin admin={admin} key={i} />
-            ))}
+            {admins?.map((admin, i) => <Admin admin={admin} key={i} />)}
           </TableBody>
         </Table>
 

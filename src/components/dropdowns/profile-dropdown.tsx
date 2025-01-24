@@ -1,18 +1,17 @@
 import { useProfile } from "@/queries/use-profile";
+import { Bell, LogOut, NotebookPen, User } from "lucide-react";
+import LogoutDialog from "../dialogs/logout-dialog";
+import ProfileDialog from "../dialogs/profile-dialog";
+import NotificationsDrawer from "../drawers/notifications-drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Bell, LogOut, NotebookPen, User } from "lucide-react";
-import ProfileDialog from "../dialogs/profile-dialog";
-import NotificationsDrawer from "../drawers/notifications-drawer";
-import LogoutDialog from "../dialogs/logout-dialog";
 
 type Props = { children: React.ReactNode };
 
