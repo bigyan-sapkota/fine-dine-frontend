@@ -26,18 +26,34 @@
   h6 {
     @apply scroll-m-20 font-semibold tracking-tight lg:text-lg;
   }
+  :root {
+    --radius: 0.5rem;
+  }
 }
 
 @layer utilities {
+  .max-width {
+    @apply mx-auto max-w-[1350px];
+  }
+
   .custom-transition {
     @apply transition-all duration-300;
   }
 
+  /* margin and padding */
   .section-padding-x {
-    @apply px-20;
+    @apply px-5 sm:px-8 md:px-12 lg:px-16 xl:px-20;
+  }
+
+  .section-padding-y {
+    @apply py-10 lg:py-16 xl:py-20;
   }
 
   .section-margin-y {
-    @apply my-14;
+    @apply my-10 lg:my-16 xl:my-20;
+  }
+
+  .section-padding-y {
+    @apply py-10 lg:py-16 xl:py-20;
   }
 }

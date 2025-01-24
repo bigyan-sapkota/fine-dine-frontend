@@ -1,4 +1,4 @@
-import DynamicText from "@/components/layout/dynamic-text";
+import DynamicText from "@/components/layouts/dynamic-text";
 import { aboutUs } from "@/lib/constants";
 import React from "react";
 
@@ -17,11 +17,11 @@ export default function AboutFinedine() {
         {/* quote container */}
         <div className="w-1/2">
           <p className="text-text-secondary">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint
-            asperiores ad quae illo autem exercitationem numquam voluptate?
-            Velit, necessitatibus! Laborum expedita beatae officia repudiandae
-            quidem eius soluta, quos sunt dignissimos provident incidunt
-            accusamus? Doloremque cum labore explicabo, veritatis unde dolorem!
+            Welcome to Fine Dine, where technology meets convenience. Our goal
+            is to revolutionize dining by offering a seamless table reservation
+            experience, ensuring efficiency for restaurants and delightful
+            moments for diners. Together, we’re shaping the future of dining
+            experiences.
           </p>
 
           <div className="flex items-center gap-4 mt-4">
@@ -34,7 +34,7 @@ export default function AboutFinedine() {
             </div>
             <div>
               <h5>Sudip Pandey</h5>
-              <p>Project Lead</p>
+              <p>Finedine Contributor</p>
             </div>
           </div>
         </div>

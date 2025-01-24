@@ -39,3 +39,34 @@ export type FooterService = {
   id: number;
   text: string;
 };
+
+type UserProfile = User & {
+  authSource: "credentials" | "google";
+  lastNotificationReadAt: string;
+  totalUnreadNotifications: number;
+};
+
+type NotificationResult = {
+  id: string;
+  user: string;
+  title: string;
+  description: string | null;
+  receivedAt: string;
+};
+
+type Table = {
+  _id: string;
+  tag: string;
+  attribute: string;
+  capacity: numer;
+  available: boolean;
+};
+
+type Booking = {
+  id: string;
+  user: UserProfile;
+  table: Table;
+  startsAt: string;
+  endsAt: string;
+  isCancelled: boolean;
+};

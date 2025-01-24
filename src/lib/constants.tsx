@@ -10,6 +10,8 @@ import {
   SocialMedia,
 } from "../../typing";
 
+export const BACKEND_URL = "https://finedine-x.vercel.app";
+
 export const contact: Contact[] = [
   {
     id: 1,
