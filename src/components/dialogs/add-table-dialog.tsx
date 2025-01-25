@@ -45,12 +45,12 @@ export default function AddTableDialog({ children, mode, table }: Props) {
   });
 
   const { mutate: addTable } = useAddTable();
-  const { mutate: updateTable } = useUpdateTable(table?.id || "");
+  const { mutate: updateTable } = useUpdateTable(table?._id || "");
 
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const isAddingTable = !!useIsMutating({ mutationKey: addTableKey });
   const isUpdatingTable = !!useIsMutating({
-    mutationKey: updateTableKey(table?.id!),
+    mutationKey: updateTableKey(table?._id!),
   });
 
   const disabled = mode === "add" ? isAddingTable : isUpdatingTable;
@@ -128,7 +128,7 @@ export default function AddTableDialog({ children, mode, table }: Props) {
           </DialogClose>
 
           {table && (
-            <DeleteTableDialog id={table.id}>
+            <DeleteTableDialog id={table._id}>
               <Button type="button" variant="outline">
                 Delete Table
               </Button>

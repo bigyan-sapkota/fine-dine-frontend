@@ -12,11 +12,11 @@ const currYear = date.getFullYear();
 
 export default function Footer() {
   return (
-    <footer className="section-padding-x">
+    <footer className="section-padding-x max-width">
       {/* top footer */}
-      <div className="flex justify-between py-10">
+      <div className="flex flex-col justify-between gap-8 py-10 lg:flex-row">
         {/* logo and text */}
-        <div className="bg-secondary w-[30%] p-10 rounded-3xl">
+        <div className="rounded-3xl bg-primary p-10 lg:w-[30%]">
           {/* logo */}
           <Link href="/">
             <p className="text-3xl font-extrabold tracking-wider text-white">
@@ -24,12 +24,12 @@ export default function Footer() {
             </p>
           </Link>
 
-          <h6 className="text-white mt-2">
+          <h6 className="mt-2 text-white">
             Fine Dine simplifies online table reservations
           </h6>
 
-          <h6 className="text-white mt-2">
-            Book your spot effortlessly ,enjoy exceptional hospitality.
+          <h6 className="mt-2 text-white">
+            Book your spot effortlessly enjoy exceptional hospitality.
           </h6>
         </div>
 
@@ -37,13 +37,13 @@ export default function Footer() {
         <div>
           <div>
             <h4>About</h4>
-            <div className="bg-secondary h-2 w-16"></div>
+            <div className="h-2 w-16 bg-secondary"></div>
           </div>
 
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 font-semibold">
             {userFooter.map((item) => (
               <Link
-                className="flex items-center gap-2 hover:text-primary custom-transition"
+                className="custom-transition flex items-center gap-2 hover:text-primary"
                 key={item.id}
                 href={item.routeTo}
               >
@@ -58,13 +58,13 @@ export default function Footer() {
         <div>
           <div>
             <h4>Quick Links</h4>
-            <div className="bg-secondary h-2 w-[7.5rem]"></div>
+            <div className="h-2 w-[7.5rem] bg-secondary"></div>
           </div>
 
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 font-semibold">
             {quickLinks.map((item) => (
               <Link
-                className="flex items-center gap-2 hover:text-primary custom-transition"
+                className="custom-transition flex items-center gap-2 hover:text-primary"
                 key={item.id}
                 href={item.routeTo}
               >
@@ -79,10 +79,10 @@ export default function Footer() {
         <div>
           <div>
             <h4>Services</h4>
-            <div className="bg-secondary h-2 w-24"></div>
+            <div className="h-2 w-24 bg-secondary"></div>
           </div>
 
-          <div className="mt-3 space-y-2">
+          <div className="mt-3 space-y-2 font-semibold">
             {footerServices.map((item) => (
               <div className="flex items-center gap-2" key={item.id}>
                 <GoChevronRight />
@@ -94,12 +94,12 @@ export default function Footer() {
       </div>
 
       {/* line */}
-      <div className="h-2 bg-secondary"></div>
+      <div className="h-1 bg-secondary lg:h-2"></div>
 
       {/* bottom footer */}
-      <div className="py-8 flex items-center justify-between">
+      <div className="flex flex-col-reverse items-center justify-between gap-4 py-4 lg:flex-row lg:py-8">
         {/* copyright text */}
-        <div className="flex gap-2 font-extrabold text-lg">
+        <div className="flex gap-2 text-lg font-extrabold">
           <p className="text-primary">&copy;{currYear} Finedine</p>
           <p>| All Rights Reserved</p>
         </div>
@@ -111,7 +111,7 @@ export default function Footer() {
               <a
                 href={item.link}
                 target="_blank"
-                className="font-bold border-b border-text-primary pb-0.5 hover:text-primary custom-transition"
+                className="custom-transition border-b border-text-primary pb-0.5 font-bold hover:text-primary"
               >
                 {item.text}
               </a>

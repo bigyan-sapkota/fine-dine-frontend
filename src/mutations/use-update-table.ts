@@ -27,7 +27,7 @@ export const useUpdateTable = (id: string) => {
       if (!oldTablesData) return;
 
       const updateTablesData: Table[] = oldTablesData.map((table) => {
-        if (table.id !== id) return table;
+        if (table._id !== id) return table;
         return updatedTable as Table;
       });
 

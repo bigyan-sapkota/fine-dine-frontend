@@ -44,21 +44,21 @@ export const aboutUs: AboutUs[] = [
   {
     id: 1,
     image: "./home/about-1.jpg",
-    title: "Restaurant",
+    title: "Seamless Booking",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
   },
   {
     id: 2,
     image: "./home/about-2.jpg",
-    title: "Cocktail Bar",
+    title: "Dynamic Menu",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
   },
   {
     id: 3,
     image: "./home/about-3.jpg",
-    title: "Private Dining",
+    title: "Simplified Dining",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae error praesentium sunt ab obcaecati. Ab facilis illo quod est pariatur.",
   },

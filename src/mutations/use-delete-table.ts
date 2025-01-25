@@ -26,7 +26,7 @@ export const useDeleteTable = (id: string) => {
       toast.success("Table deleted successfully");
       const oldTables = queryClient.getQueryData<Table[]>(tableKey);
       if (!oldTables) return;
-      const updatedTables = oldTables.filter((table) => table.id !== id);
+      const updatedTables = oldTables.filter((table) => table._id !== id);
       queryClient.setQueryData<Table[]>(tableKey, updatedTables);
     },
   });

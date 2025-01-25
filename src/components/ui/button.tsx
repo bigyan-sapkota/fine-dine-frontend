@@ -20,11 +20,13 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        primary:
+          "after:custom-transition relative z-50 bg-primary font-semibold text-white after:absolute after:-right-2.5 after:-z-10 after:hidden after:h-[150%] after:w-[60%] after:rounded-lg after:border-4 after:border-primary after:content-[''] hover:after:w-full after:lg:block",
       },
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        lg: "h-10 rounded-md px-8 py-6",
         icon: "h-9 w-9",
       },
     },
@@ -32,7 +34,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -55,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       Icon,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -81,7 +83,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       </Comp>
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

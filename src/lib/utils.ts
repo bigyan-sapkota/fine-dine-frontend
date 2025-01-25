@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { BACKEND_URL } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,4 +14,11 @@ export const extractErrorMessage = (err: unknown): string => {
     return err.message;
   }
   return "Unknown error occurred!";
+};
+
+export const redirectToLogin = () => {
+  return window.open(
+    `${BACKEND_URL}/api/auth/login/google?redirect=${location.origin}`,
+    "_blank",
+  );
 };
