@@ -35,8 +35,6 @@ export const socialMedia: SocialMedia[] = [
 export const navigationLinks: NavigationLinks[] = [
   { id: 1, text: "Home", routeTo: "/" },
   { id: 2, text: "About", routeTo: "/about" },
-  { id: 3, text: "Services", routeTo: "/services" },
-  { id: 4, text: "Contact", routeTo: "/contact" },
 ];
 
 export const aboutUs: AboutUs[] = [

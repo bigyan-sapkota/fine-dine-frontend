@@ -1,5 +1,8 @@
+"use client";
+
 import Hero from "@/components/layouts/hero";
 import AboutUs from "@/components/pages/about/about-us";
+import Testimonial from "@/components/pages/about/testimonials";
 import React from "react";
 
 const Page = () => {
@@ -12,6 +15,10 @@ const Page = () => {
 
       <div className="section-margin-y">
         <AboutUs />
+      </div>
+
+      <div className="section-margin-y">
+        <Testimonial />
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ export default function AboutUs() {
           />
         </div>
 
-        <p className="mt-4 text-center text-black lg:text-left">
+        <p className="mt-4 text-black">
           Fine Dine is your ultimate dining companion, revolutionizing the way
           you reserve tables at your favorite restaurants. With its
           user-friendly platform, Fine Dine makes table reservations seamless,
