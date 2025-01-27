@@ -5,7 +5,6 @@ import {
   AboutUs,
   Contact,
   FooterColumn,
-  FooterService,
   NavigationLinks,
   SocialMedia,
 } from "../../typing";
@@ -65,8 +64,8 @@ export const aboutUs: AboutUs[] = [
 ];
 
 export const userFooter: FooterColumn[] = [
-  { id: 1, text: "Sign in ", routeTo: "/sign-in" },
-  { id: 2, text: "Sign Up", routeTo: "/sign-up" },
+  { id: 1, text: "Sign in ", routeTo: "/login" },
+  { id: 2, text: "Sign Up", routeTo: "/register" },
   { id: 3, text: "Contact Us", routeTo: "/contact" },
 ];
 
@@ -74,10 +73,4 @@ export const quickLinks: FooterColumn[] = [
   { id: 1, text: "Home ", routeTo: "/" },
   { id: 2, text: "About Us", routeTo: "/about" },
   { id: 3, text: "Services", routeTo: "/services" },
-  { id: 4, text: "Request a Demo", routeTo: "/contact" },
-];
-
-export const footerServices: FooterService[] = [
-  { id: 1, text: "Online Table Reservation" },
-  { id: 2, text: "Dynamic Menu" },
 ];

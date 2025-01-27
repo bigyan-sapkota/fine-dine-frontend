@@ -95,16 +95,26 @@ export default function Navbar() {
           </nav>
         )}
 
-        {/* button */}
+        {/* login / register */}
         <div>
           {/* login register text */}
           {!profile && !isLoadingProfile && (
-            <Link href="/login" className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
               <IoPersonCircleOutline className="text-3xl" />
-              <p className="custom-transition font-bold hover:cursor-pointer hover:text-primary">
-                Login / Register
-              </p>
-            </Link>
+              <Link
+                href="/login"
+                className="custom-transition font-bold hover:cursor-pointer hover:text-primary"
+              >
+                Login
+              </Link>
+              <span>/</span>
+              <Link
+                href="/register"
+                className="custom-transition font-bold hover:cursor-pointer hover:text-primary"
+              >
+                Register
+              </Link>
+            </div>
           )}
 
           {isLoadingProfile && (

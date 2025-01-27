@@ -1,11 +1,30 @@
-import {
-  footerServices,
-  quickLinks,
-  socialMedia,
-  userFooter,
-} from "@/lib/constants";
+import { quickLinks, socialMedia, userFooter } from "@/lib/constants";
 import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
+import { IoMdMail } from "react-icons/io";
+import { IoLocationSharp } from "react-icons/io5";
+import { FaPhoneAlt } from "react-icons/fa";
+
+const contactLinks = [
+  {
+    id: 1,
+    icon: <IoMdMail />,
+    text: "info@finedine.com",
+    link: "mailto:info@finedine.com",
+  },
+  {
+    id: 2,
+    icon: <FaPhoneAlt />,
+    text: "+977 9841644488",
+    link: "tel:9841644488",
+  },
+  {
+    id: 3,
+    icon: <IoLocationSharp />,
+    text: "Bharatpur-9, Chitwan",
+    link: "https://maps.app.goo.gl/NMN79D2hzti9KMRf7",
+  },
+];
 
 const date = new Date();
 const currYear = date.getFullYear();
@@ -36,7 +55,7 @@ export default function Footer() {
         {/* user */}
         <div>
           <div>
-            <h4>About</h4>
+            <h4>User</h4>
             <div className="h-2 w-16 bg-secondary"></div>
           </div>
 
@@ -78,16 +97,23 @@ export default function Footer() {
         {/* Services */}
         <div>
           <div>
-            <h4>Services</h4>
-            <div className="h-2 w-24 bg-secondary"></div>
+            <h4>Help/Contact</h4>
+            <div className="h-2 w-40 bg-secondary"></div>
           </div>
 
           <div className="mt-3 space-y-2 font-semibold">
-            {footerServices.map((item) => (
-              <div className="flex items-center gap-2" key={item.id}>
-                <GoChevronRight />
-                <span>{item.text}</span>
-              </div>
+            {contactLinks.map((item) => (
+              <a
+                className="flex items-center gap-3"
+                key={item.id}
+                href={item.link}
+                target="_blank"
+              >
+                <span className="text-lg text-primary">{item.icon}</span>
+                <span className="custom-transition cursor-pointer hover:text-primary">
+                  {item.text}
+                </span>
+              </a>
             ))}
           </div>
         </div>

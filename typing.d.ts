@@ -35,11 +35,6 @@ export type FooterColumn = {
   routeTo: string;
 };
 
-export type FooterService = {
-  id: number;
-  text: string;
-};
-
 type UserProfile = User & {
   authSource: "credentials" | "google";
   lastNotificationReadAt: string;

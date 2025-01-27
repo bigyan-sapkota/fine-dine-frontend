@@ -21,12 +21,14 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         primary:
-          "after:custom-transition relative z-50 bg-primary font-semibold text-white after:absolute after:-right-2.5 after:-z-10 after:hidden after:h-[150%] after:w-[60%] after:rounded-lg after:border-4 after:border-primary after:content-[''] hover:after:w-full after:lg:block",
+          "after:custom-transition relative z-50 bg-primary font-semibold text-white after:absolute after:-right-2.5 after:-z-10 after:hidden after:h-[145%] after:w-[90%] after:rounded-lg after:border-4 after:border-primary after:content-[''] hover:after:w-2/5 after:lg:block",
+        common:
+          "bg-primary text-white font-semibold border-2 border-primary hover:bg-white hover:text-primary custom-transition",
       },
       size: {
         default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8 py-6",
+        sm: "rounded-md px-8 text-base py-2 lg:py-3",
+        lg: "h-10 rounded-md px-8 py-7",
         icon: "h-9 w-9",
       },
     },

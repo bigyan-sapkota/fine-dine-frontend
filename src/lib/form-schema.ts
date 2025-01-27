@@ -39,3 +39,41 @@ export const bookingSchema = z.object({
 });
 
 export type BookingForm = z.infer<typeof bookingSchema>;
+
+export const registrationSchema = z
+  .object({
+    email: z.string().min(1, "Email is required").email("Invalid email format"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .max(100, "Password must not exceed 100 characters"),
+    confirmPassword: z.string().min(1, "Please confirm your password"),
+    name: z
+      .string()
+      .min(3, "Name must be at least 3 characters")
+      .max(60, "Name must not exceed 60 characters"),
+    phone: z
+      .string()
+      .regex(/^\d{10}$/, "Phone number must be exactly 10 digits")
+      .optional(),
+    address: z
+      .string()
+      .min(10, "Address must be at least 10 characters")
+      .max(200, "Address must not exceed 200 characters")
+      .optional(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+export type RegistrationSchema = z.infer<typeof registrationSchema>;
+
+export const loginSchema = z.object({
+  email: z.string().min(1, "Email is required").email("Invalid email format"),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(1, "Password is required"),
+});
+
+export type LoginSchema = z.infer<typeof loginSchema>;
