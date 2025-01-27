@@ -35,7 +35,16 @@ export type FooterColumn = {
   routeTo: string;
 };
 
-type UserProfile = User & {
+type User = {
+  _id: string;
+  name: string;
+  email: string;
+  image: string | undefined;
+  address: string | undefined;
+  phone: string | undefined;
+};
+
+export type UserProfile = User & {
   authSource: "credentials" | "google";
   lastNotificationReadAt: string;
   totalUnreadNotifications: number;

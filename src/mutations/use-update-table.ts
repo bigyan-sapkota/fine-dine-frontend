@@ -33,18 +33,26 @@ export const useUpdateTable = (id: string) => {
 
       queryClient.setQueryData<Table[]>(tableKey, updateTablesData);
     },
+
+    onError(err) {
+      toast.dismiss();
+      toast.error(`Could not update table! ${err}`);
+    },
   });
 };
 
 const updateTable = async (id: string, data: UpdateTableSchema) => {
   try {
+    console.log("updating table...");
     const res = await axios.put<{ table: Table }>(
       `${BACKEND_URL}/api/tables/${id}`,
       data,
       { withCredentials: true },
     );
+    console.log("updated table");
     return res.data.table;
   } catch (error) {
+    console.log("update table errro");
     throw new Error(extractErrorMessage(error));
   }
 };

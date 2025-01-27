@@ -4,21 +4,22 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Booking } from "../../typing";
 
-type KeyOptions = {
-  userId: string | null;
-  isCancelled: boolean | null;
-};
+export type KeyOptions = Partial<{
+  status: "pending" | "completed" | "cancelled";
+  userId: string;
+  tableId: string;
+}>;
 
 export const adminBookingsKey = (options: KeyOptions) => [
   "admin-bookings",
   options,
 ];
 
-export const useAdminBookings = ({ userId, isCancelled }: KeyOptions) => {
+export const useAdminBookings = (options: KeyOptions) => {
   return useInfiniteQuery({
-    queryKey: adminBookingsKey({ userId, isCancelled }),
+    queryKey: adminBookingsKey(options),
     queryFn: ({ signal, pageParam }) =>
-      fetchBookings({ signal, cursor: pageParam, userId, isCancelled }),
+      fetchBookings({ signal, cursor: pageParam, ...options }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam(lastPage) {
       return lastPage[lastPage.length - 1]?.startsAt;
@@ -32,19 +33,20 @@ const fetchBookings = async ({
   signal,
   cursor,
   userId,
-  isCancelled,
+  status,
+  tableId,
 }: Options): Promise<Booking[]> => {
   try {
     const url = new URL(`${BACKEND_URL}/api/bookings`);
     if (cursor) url.searchParams.set("cursor", cursor);
     if (userId) url.searchParams.set("userId", userId);
-    if (isCancelled)
-      url.searchParams.set("isCancelled", isCancelled.toString());
-    const res = axios.get<{ bookings: Booking[] }>(url.href, {
+    if (status) url.searchParams.set("status", status);
+    if (tableId) url.searchParams.set("tableId", tableId);
+    const res = await axios.get<{ bookings: Booking[] }>(url.href, {
       signal,
       withCredentials: true,
     });
-    return (await res).data.bookings;
+    return res.data.bookings;
   } catch (error) {
     throw new Error(extractErrorMessage(error));
   }

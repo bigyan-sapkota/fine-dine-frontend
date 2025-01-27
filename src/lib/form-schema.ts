@@ -16,6 +16,13 @@ export const addTableSchema = z.object({
       .min(1, "Table can't have capacity less than 1")
       .max(12, "Table can't have capacity more than 12"),
   ),
+  hourRate: z.preprocess(
+    (val) => Number(val) || undefined,
+    z
+      .number({ message: "Hourly Rate is required" })
+      .min(100, "Hourly rate must be minimum Rs. 100")
+      .max(1000, "Hourly rate for a table can't exceed Rs. 1,000"),
+  ),
 });
 
 export type AddTableSchema = z.infer<typeof addTableSchema>;

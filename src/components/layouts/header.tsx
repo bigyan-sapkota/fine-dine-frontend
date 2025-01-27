@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "left-0 top-0 z-[100] h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
+        "left-0 top-0 z-10 h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
         {
           fixed: pathname === "/",
           sticky: pathname !== "/",

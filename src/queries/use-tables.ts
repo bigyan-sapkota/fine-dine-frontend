@@ -1,31 +1,33 @@
+import { BACKEND_URL } from "@/lib/constants";
+import { concatenateSearchParams, extractErrorMessage } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Table } from "../../typing";
-import { BACKEND_URL } from "@/lib/constants";
-import { extractErrorMessage } from "@/lib/utils";
 
-export const tableKey = ["tables"];
+export const tableKey = (tag?: string) => ["tables", tag];
 
-export const useTables = () => {
+export const useTables = (tag?: string) => {
   return useQuery({
-    queryKey: tableKey,
-    queryFn: fetchTables,
+    queryKey: tableKey(tag),
+    queryFn: ({ signal }) => fetchTables({ tag, signal }),
     refetchOnWindowFocus: true,
   });
 };
 
 const fetchTables = async ({
   signal,
+  tag,
 }: {
+  tag: string | undefined;
   signal: AbortSignal;
 }): Promise<Table[]> => {
   try {
     const res = await axios.get<{ tables: Table[] }>(
-      `${BACKEND_URL}/api/tables`,
+      concatenateSearchParams(`${BACKEND_URL}/api/tables`, { tag }),
       {
         withCredentials: true,
         signal,
-      }
+      },
     );
     return res.data.tables;
   } catch (error) {

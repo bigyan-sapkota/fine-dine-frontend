@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-export const useDebounce = (dependency: unknown, delay = 200) => {
-  const [enabled, setEnabled] = useState(false);
+export const useDebounce = <T>(value: T, delay = 300): T => {
+  const [debouncedValue, setDetouncedValue] = useState(value);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setEnabled(true);
+      setDetouncedValue(value);
     }, delay);
 
     return () => {
-      setEnabled(false);
       clearTimeout(timeout);
     };
-  }, [dependency, delay]);
+  }, [value, delay]);
 
-  return enabled;
+  return debouncedValue;
 };

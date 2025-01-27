@@ -1,8 +1,8 @@
 import { BACKEND_URL } from "@/lib/constants";
+import { extractErrorMessage } from "@/lib/utils";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { UserProfile } from "../../typing";
-import { extractErrorMessage } from "@/lib/utils";
+import { User } from "../../typing";
 
 export const usersKey = (search: string) => ["users", search];
 
@@ -34,13 +34,13 @@ const fetchUsers = async ({
   search: string;
   signal: AbortSignal;
   page: number;
-}) => {
+}): Promise<User[]> => {
   try {
     const searchParams = new URLSearchParams();
     searchParams.set("q", search);
     searchParams.set("page", page.toString());
     const url = `${BACKEND_URL}/api/users?${searchParams.toString()}`;
-    const res = await axios.get<{ users: UserProfile[] }>(url, {
+    const res = await axios.get<{ users: User[] }>(url, {
       signal,
       withCredentials: true,
     });

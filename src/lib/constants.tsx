@@ -9,6 +9,9 @@ import {
   SocialMedia,
 } from "../../typing";
 
+export const dummyUserImage = 'https://avatars.githubusercontent.com/u/110604197?v=4';
+
+
 export const BACKEND_URL = "https://finedine-x.vercel.app";
 
 export const contact: Contact[] = [

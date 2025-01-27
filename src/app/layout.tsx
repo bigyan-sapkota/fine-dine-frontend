@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import UpdateProfileDialog from "@/components/dialogs/update-profile-dialog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             richColors
             closeButton
           />
+          <UpdateProfileDialog />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryProvider>
       </body>

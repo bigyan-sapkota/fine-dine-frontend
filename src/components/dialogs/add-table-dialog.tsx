@@ -41,6 +41,7 @@ export default function AddTableDialog({ children, mode, table }: Props) {
       tag: table?.tag,
       attribute: table?.attribute,
       capacity: table?.capacity,
+      hourRate: 400,
     },
   });
 
@@ -78,6 +79,7 @@ export default function AddTableDialog({ children, mode, table }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
+
       <DialogContent className="flex max-h-screen flex-col">
         <DialogHeader>
           <DialogTitle className="text-center">
@@ -108,14 +110,25 @@ export default function AddTableDialog({ children, mode, table }: Props) {
               {...register("attribute")}
               placeholder="Table attribute(e.g.T01)..."
             />
+
             <FormInput
               id="capacity"
               Icon={null}
               error={errors.capacity?.message}
               label="Capacity"
-              type="string"
+              type="text"
               {...register("capacity")}
-              placeholder="Table Capacity"
+              placeholder="table capacity..."
+            />
+
+            <FormInput
+              id="hourlyRate"
+              Icon={null}
+              error={errors.capacity?.message}
+              label="Hourly Rate"
+              type="text"
+              {...register("hourRate")}
+              placeholder="hourly rate in Rs."
             />
           </div>
         </form>
