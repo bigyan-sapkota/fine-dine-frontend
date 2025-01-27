@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "left-0 top-0 z-[9999] h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
+        "left-0 top-0 z-[100] h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
         {
           fixed: pathname === "/",
           sticky: pathname !== "/",
@@ -122,7 +122,7 @@ export default function Navbar() {
           )}
 
           {profile && (
-            <div className="flex items-center space-x-1.5 text-sm">
+            <div className="relative z-[9999] flex items-center space-x-1.5 text-sm">
               <div className="hidden sm:inline">
                 <span className="mr-1">Welcome, </span>
                 <span className="font-bold">{profile.name.split(" ")[0]}</span>

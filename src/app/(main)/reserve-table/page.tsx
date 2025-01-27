@@ -79,7 +79,7 @@ const Page = () => {
   return (
     <div className="section-padding-x max-width section-padding-y flex flex-col bg-gray-100 lg:flex-row">
       <div className="hidden lg:block lg:w-1/2">
-        <img src="/reserve-table/booking.svg" alt="reserve-table" />
+        <Image src="/reserve-table/booking.svg" alt="reserve-table" />
       </div>
 
       <div className="rounded-xl border bg-white p-4 shadow lg:w-1/2 lg:p-10">

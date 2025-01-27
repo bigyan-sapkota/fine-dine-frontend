@@ -6,26 +6,30 @@ import { Button } from "../ui/button";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { redirectToLogin } from "@/lib/utils";
 import { loginSchema, LoginSchema } from "@/lib/form-schema";
+import { useLogin } from "@/mutations/use-login";
+import Link from "next/link";
 
 const Login = () => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
   const {
     register,
+    reset,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
   });
 
+  const { mutate, isPending } = useLogin();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const onSubmit = async (data: LoginSchema) => {
-    try {
-      // Handle form submission here
-      console.log("Form data:", data);
-      // Add your API call or authentication logic here
-    } catch (error) {
-      console.error("Login error:", error);
-    }
+    if (isPending) return;
+    mutate(data, {
+      onSuccess() {
+        reset();
+      },
+    });
   };
 
   return (
@@ -89,15 +93,18 @@ const Login = () => {
               variant="common"
               size="sm"
               className="mt-6 w-full"
-              disabled={isSubmitting}
+              disabled={isPending}
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isPending ? "Submitting..." : "Submit"}
             </Button>
 
             <div className="mt-2 flex w-full items-center justify-between">
-              <p className="custom-transition cursor-pointer text-sm font-semibold text-black underline hover:text-primary">
+              <Link
+                href="/register"
+                className="custom-transition cursor-pointer text-sm font-semibold text-black underline hover:text-primary"
+              >
                 Haven't registered yet? Register
-              </p>
+              </Link>
               <p className="custom-transition cursor-pointer text-sm font-semibold text-primary hover:text-black">
                 Forgot password?
               </p>

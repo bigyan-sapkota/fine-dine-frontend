@@ -1,11 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import { redirectToLogin } from "@/lib/utils";
+import { cn, imageToDataUri, redirectToLogin } from "@/lib/utils";
 import { registrationSchema, RegistrationSchema } from "@/lib/form-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRegister } from "@/mutations/user-register";
+import { Label } from "../ui/label";
+import { XIcon } from "lucide-react";
+import Avatar from "../utils/avatar";
+import { Input } from "../ui/input";
 
 const Register = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -13,30 +18,56 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<RegistrationSchema>({
     resolver: zodResolver(registrationSchema),
   });
 
-  const onSubmit = async (data: RegistrationSchema) => {
-    try {
-      // Handle form submission here
-      console.log("Form data:", data);
-      // Add your API call or registration logic here
-    } catch (error) {
-      console.error("Registration error:", error);
-    }
+  const [imageUri, setImageUri] = useState<string | undefined>(undefined);
+  const imagePickerRef = useRef<HTMLInputElement>(null);
+
+  const unPickImage = () => {
+    setImageUri(undefined);
+    if (imagePickerRef.current) imagePickerRef.current.value = "";
   };
 
+  const onPickImage = async () => {
+    const imageFile =
+      imagePickerRef.current?.files && imagePickerRef.current.files[0];
+    if (!imageFile) {
+      unPickImage();
+      return;
+    }
+    const imageUri = await imageToDataUri(imageFile);
+    setImageUri(imageUri);
+  };
+
+  const { mutate, isPending } = useRegister();
+
+  const onSubmit = handleSubmit((data) => {
+    if (isPending) return;
+    const image =
+      imagePickerRef.current?.files && imagePickerRef.current.files[0];
+    mutate(
+      { ...data, image: image || undefined },
+      {
+        onSuccess() {
+          unPickImage();
+          reset();
+        },
+      },
+    );
+  });
   return (
     <div className="w-full lg:max-w-lg">
       <div>
-        <h2 className="text-dark font mb-6 text-center font-extrabold tracking-wider md:mb-8 lg:mb-6 lg:text-left">
+        <h2 className="text-dark font mb-6 text-center font-extrabold tracking-wider md:mb-8 lg:mb-10 lg:text-left">
           Register to Finedine
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-4 w-full space-y-6">
+      <form onSubmit={onSubmit} className="mt-4 w-full space-y-6">
         {/* Name and phone number input */}
         <div className="flex flex-col items-center gap-8 lg:flex-row">
           <div className="w-full space-y-1 lg:w-1/2">
@@ -102,6 +133,7 @@ const Register = () => {
           )}
         </div>
 
+        {/* confirm password */}
         <div className="relative mb-4 space-y-1">
           <input
             {...register("confirmPassword")}
@@ -124,6 +156,34 @@ const Register = () => {
           </button>
         </div>
 
+        {/* image input field */}
+        <div>
+          <div className="flex items-center space-x-2">
+            <Label htmlFor="image" className="whitespace-nowrap">
+              Display Image
+            </Label>
+            <Input
+              id="image"
+              type="file"
+              ref={imagePickerRef}
+              onChange={onPickImage}
+              className={cn("w-full", { hidden: !!imageUri })}
+            />
+            {imageUri && (
+              <button
+                onClick={unPickImage}
+                type="button"
+                className="relative size-fit rounded-full"
+              >
+                <div className="bg-foreground text-primary-foreground absolute right-0 top-0 z-10 size-fit rounded-full">
+                  <XIcon className="size-3" />
+                </div>
+                <Avatar src={imageUri} />
+              </button>
+            )}
+          </div>
+        </div>
+
         <div className="flex flex-col items-center gap-4">
           <button
             type="button"
@@ -143,7 +203,9 @@ const Register = () => {
             variant="common"
             size="sm"
             className="w-full"
+            onClick={onSubmit}
             disabled={isSubmitting}
+            loading={isPending}
           >
             {isSubmitting ? "Creating account..." : "Create an account"}
           </Button>
