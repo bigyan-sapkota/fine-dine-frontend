@@ -21,7 +21,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         primary:
-          "after:custom-transition relative z-50 bg-primary font-semibold text-white after:absolute after:-right-2.5 after:-z-10 after:hidden after:h-[145%] after:w-[90%] after:rounded-lg after:border-4 after:border-primary after:content-[''] hover:after:w-2/5 after:lg:block",
+          "after:custom-transition relative z-50 bg-primary font-semibold text-white after:absolute after:-right-1.5 after:-z-10 after:hidden after:h-[120%] after:w-[90%] after:rounded-lg after:border-4 after:border-primary after:content-[''] hover:after:w-2/5 after:lg:block",
         common:
           "bg-primary text-white font-semibold border-2 border-primary hover:bg-white hover:text-primary custom-transition",
       },

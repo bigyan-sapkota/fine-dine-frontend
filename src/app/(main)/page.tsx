@@ -1,4 +1,5 @@
 "use client";
+import Testimonial from "@/components/pages/about/testimonials";
 import AboutFinedine from "@/components/pages/home/about-finedine";
 import FollowInsta from "@/components/pages/home/follow-insta";
 import HeroBanner from "@/components/pages/home/hero-banner";
@@ -14,6 +15,10 @@ export default function Page() {
 
       <div className="section-margin-y">
         <FollowInsta />
+      </div>
+
+      <div className="section-margin-y">
+        <Testimonial />
       </div>
     </div>
   );
