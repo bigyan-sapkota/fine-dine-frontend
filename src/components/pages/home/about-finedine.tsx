@@ -40,11 +40,11 @@ export default function AboutFinedine() {
         </div>
       </div>
 
-      <div className="mt-14 flex flex-col justify-between gap-16 lg:flex-row">
+      <div className="mt-5 flex flex-col justify-between gap-8 lg:mt-14 lg:flex-row">
         {aboutUs.map((item, i) => (
           <div key={item.id} className="w-full">
             <div
-              className={`h-96 w-full rounded-3xl bg-cover bg-center bg-no-repeat p-6 ${i === 1 && "mt-16"} group`}
+              className={`h-96 w-full rounded-3xl bg-cover bg-center bg-no-repeat p-6 ${i === 1 && "lg:mt-16"} group`}
               style={{
                 backgroundImage: `url('${item.image}')`,
               }}

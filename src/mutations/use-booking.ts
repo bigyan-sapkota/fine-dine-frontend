@@ -1,13 +1,18 @@
 import { BACKEND_URL } from "@/lib/constants";
 import { getStripe } from "@/lib/stripe";
+import { extractErrorMessage } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { toast } from "sonner";
 
 export const bookingKey = ["booking-checkout"];
 export const useBooking = () => {
-  useMutation({
+  return useMutation({
     mutationKey: bookingKey,
     mutationFn: checkoutBooking,
+    onError(err) {
+      toast.error(`Could not reserve table! ${extractErrorMessage(err)}`);
+    },
   });
 };
 
@@ -29,5 +34,5 @@ const checkoutBooking = async (data: Options) => {
     },
   );
   const stripe = await getStripe();
-  stripe?.redirectToCheckout({ sessionId: res.data.checkoutSessionId });
+  await stripe?.redirectToCheckout({ sessionId: res.data.checkoutSessionId });
 };

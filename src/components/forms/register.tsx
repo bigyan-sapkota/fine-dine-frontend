@@ -11,6 +11,7 @@ import { Label } from "../ui/label";
 import { XIcon } from "lucide-react";
 import Avatar from "../utils/avatar";
 import { Input } from "../ui/input";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -23,6 +24,7 @@ const Register = () => {
   } = useForm<RegistrationSchema>({
     resolver: zodResolver(registrationSchema),
   });
+  const router = useRouter();
 
   const [imageUri, setImageUri] = useState<string | undefined>(undefined);
   const imagePickerRef = useRef<HTMLInputElement>(null);
@@ -49,10 +51,12 @@ const Register = () => {
     if (isPending) return;
     const image =
       imagePickerRef.current?.files && imagePickerRef.current.files[0];
+
     mutate(
       { ...data, image: image || undefined },
       {
         onSuccess() {
+          router.replace("/");
           unPickImage();
           reset();
         },

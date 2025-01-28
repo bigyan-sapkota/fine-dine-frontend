@@ -15,12 +15,13 @@ export const useRegister = () => {
       image,
       ...data
     }: RegistrationSchema & { image: string | File | undefined }) => {
-      const imageUrl =
-        image instanceof File ? await uploadImage(image) : undefined;
-
+      console.log({ image, data });
+      // const imageUrl =
+      //   image instanceof File ? await uploadImage(image) : undefined;
+      // console.log({ imageUrl });
       const res = await apiClient.post<{ user: UserProfile }>(
         "/api/auth/register",
-        { ...data, image: typeof image === "string" ? image : imageUrl },
+        { ...data, image: typeof image === "string" ? image : undefined },
         {
           withCredentials: true,
         },
@@ -32,6 +33,7 @@ export const useRegister = () => {
       toast.error(`Could not register account! ${extractErrorMessage(err)}`);
     },
     onSuccess(data) {
+      toast.success(`User account registered successfully`)
       queryClient.setQueryData<UserProfile>(profileKey, data);
     },
   });

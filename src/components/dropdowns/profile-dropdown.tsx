@@ -66,17 +66,6 @@ export default function ProfileDropdown({ children }: Props) {
 
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="p-0 [&svg]:hidden">
-            <BookingHistory userId={profile?._id}>
-              <button className="flex w-full items-center px-2 py-1.5">
-                <LifeBuoy className="mr-2 size-4" />
-                <span>Booking History</span>
-              </button>
-            </BookingHistory>
-          </DropdownMenuSubTrigger>
-        </DropdownMenuSub>
-
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger className="p-0 [&svg]:hidden">
             <NotificationsDrawer>
               <button className="flex w-full items-center px-2 py-1.5">
                 <Bell className="mr-2 size-4" />

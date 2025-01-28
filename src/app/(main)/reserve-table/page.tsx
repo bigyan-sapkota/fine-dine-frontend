@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { bookTableKey, useBookTable } from "@/mutations/use-book-table";
+import { bookTableKey } from "@/mutations/use-book-table";
 import { useAvailableTables } from "@/queries/use-available-tables";
 import { useIsMutating } from "@tanstack/react-query";
 
@@ -23,6 +23,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useBooking } from "@/mutations/use-booking";
 import { AlertCircle, CalendarIcon, Loader2 } from "lucide-react";
 import moment from "moment";
 import Image from "next/image";
@@ -36,7 +37,7 @@ interface TimeSlot {
 
 const Page = () => {
   const { data: user } = useProfile();
-  const { mutate } = useBookTable();
+  const { mutate } = useBooking();
 
   const [date, onChange] = useState<Date | undefined>(new Date());
   const [capacity, setCapacity] = useState<number>(1);
@@ -100,6 +101,18 @@ const Page = () => {
       updatedTables = [...(selectedTables || []), id];
     }
     setSelectedTables(updatedTables!);
+  };
+
+  const reserveTable = () => {
+    if (!user?._id || !selectedTables) return;
+    mutate({
+      tableIds: selectedTables!,
+      startsAt: fullDate,
+      userId: user?._id,
+      hours: parseInt(selectedTime.split(":")[0]),
+      successUrl: `${location.origin}`,
+      cancelUrl: `${location.origin}`,
+    });
   };
 
   if (!user) {
@@ -257,16 +270,7 @@ const Page = () => {
           <Button
             disabled={disabled}
             loading={isBookingTable}
-            onClick={() =>
-              mutate({
-                tableIds: selectedTables!,
-                startsAt: fullDate,
-                userId: user?._id,
-                hours: parseInt(selectedTime.split(":")[0]),
-                successUrl: "https://www.google.com/",
-                cancelUrl: "https://www.google.com/",
-              })
-            }
+            onClick={reserveTable}
           >
             Reserve Table
           </Button>

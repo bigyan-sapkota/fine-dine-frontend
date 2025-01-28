@@ -1,19 +1,18 @@
 "use client";
+import { poppins } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+import { ProgressLink } from "@jodd/next-top-loading-bar";
 import {
   BetweenVerticalEnd,
   BookText,
   LayoutGrid,
   LogOut,
   LucideIcon,
-  SquareMenu,
-  UsersRound,
+  UsersRound
 } from "lucide-react";
-import LogoutDialog from "../dialogs/logout-dialog";
-import { usePathname } from "next/navigation";
-import { poppins } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
-import { ProgressLink } from "@jodd/next-top-loading-bar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import LogoutDialog from "../dialogs/logout-dialog";
 
 export const dashboardLinks: {
   title: string;
@@ -32,7 +31,6 @@ export const dashboardLinks: {
   },
   { title: "Tables", href: "/dashboard/tables", icon: BetweenVerticalEnd },
   { title: "Manage Roles", href: "/dashboard/roles", icon: UsersRound },
-  { title: "Menu", href: "/dashboard/menu", icon: SquareMenu },
 ];
 
 export default function DashboardSidebar() {

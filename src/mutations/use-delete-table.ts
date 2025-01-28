@@ -24,10 +24,14 @@ export const useDeleteTable = (id: string) => {
     onSuccess() {
       toast.dismiss();
       toast.success("Table deleted successfully");
-      const oldTables = queryClient.getQueryData<Table[]>(tableKey);
+      const oldTables = queryClient.getQueryData<Table[]>(tableKey(id));
       if (!oldTables) return;
       const updatedTables = oldTables.filter((table) => table._id !== id);
-      queryClient.setQueryData<Table[]>(tableKey, updatedTables);
+      queryClient.setQueryData<Table[]>(tableKey(id), updatedTables);
+    },
+    onError(err) {
+      toast.dismiss();
+      toast.error(`Could not delete table! ${extractErrorMessage(err)}`);
     },
   });
 };

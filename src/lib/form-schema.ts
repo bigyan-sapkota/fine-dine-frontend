@@ -59,10 +59,13 @@ export const registrationSchema = z
       .string()
       .min(3, "Name must be at least 3 characters")
       .max(60, "Name must not exceed 60 characters"),
-    phone: z
-      .string()
-      .regex(/^\d{10}$/, "Phone number must be exactly 10 digits")
-      .optional(),
+    phone: z.preprocess(
+      (val) => Number(val) || undefined,
+      z
+        .number()
+        .refine((val) => String(val).length === 10, "Invalid phone number")
+        .optional(),
+    ),
     address: z
       .string()
       .min(10, "Address must be at least 10 characters")

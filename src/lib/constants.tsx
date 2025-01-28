@@ -9,8 +9,8 @@ import {
   SocialMedia,
 } from "../../typing";
 
-export const dummyUserImage = 'https://avatars.githubusercontent.com/u/110604197?v=4';
-
+export const dummyUserImage =
+  "https://avatars.githubusercontent.com/u/110604197?v=4";
 
 export const BACKEND_URL = "https://finedine-x.vercel.app";
 
@@ -73,5 +73,4 @@ export const userFooter: FooterColumn[] = [
 export const quickLinks: FooterColumn[] = [
   { id: 1, text: "Home ", routeTo: "/" },
   { id: 2, text: "About Us", routeTo: "/about" },
-  { id: 3, text: "Services", routeTo: "/services" },
 ];

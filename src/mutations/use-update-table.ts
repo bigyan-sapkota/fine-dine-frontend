@@ -20,10 +20,10 @@ export const useUpdateTable = (id: string) => {
       toast.dismiss();
       toast.loading("Updating table...");
     },
-    onSuccess(updatedTable) {
+    onSuccess(updatedTable,) {
       toast.dismiss();
       toast.success("Updated table successfully");
-      const oldTablesData = queryClient.getQueryData<Table[]>(tableKey);
+      const oldTablesData = queryClient.getQueryData<Table[]>(tableKey(id));
       if (!oldTablesData) return;
 
       const updateTablesData: Table[] = oldTablesData.map((table) => {
@@ -31,7 +31,7 @@ export const useUpdateTable = (id: string) => {
         return updatedTable as Table;
       });
 
-      queryClient.setQueryData<Table[]>(tableKey, updateTablesData);
+      queryClient.setQueryData<Table[]>(tableKey(id), updateTablesData);
     },
 
     onError(err) {

@@ -68,7 +68,7 @@ type Table = {
 };
 
 type Booking = {
-  id: string;
+  _id: string;
   user: UserProfile;
   table: Table;
   startsAt: string;

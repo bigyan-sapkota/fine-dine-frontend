@@ -20,7 +20,7 @@ export const useUpdateUserAdmin = (id: string) => {
       if (!oldAdminsData) return;
 
       let updatedAdminsData: UserProfile[] = oldAdminsData.map((admin) => {
-        if (admin.id !== id) return admin;
+        if (admin._id !== id) return admin;
         return {
           ...admin,
           role: role || admin.role,
