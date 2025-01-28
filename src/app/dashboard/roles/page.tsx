@@ -27,6 +27,7 @@ import {
   UserRoundPlus,
 } from "lucide-react";
 import { UserProfile } from "../../../../typing";
+import { dummyUserImage } from "@/lib/constants";
 
 const Page = () => {
   const { data: admins, isLoading, error } = useAdmins();
@@ -75,15 +76,15 @@ const Page = () => {
 function Admin({ admin }: { admin: UserProfile }) {
   const { data: profile } = useProfile();
   const isUpdatingAdmin = !!useIsMutating({
-    mutationKey: updateUserKey(admin.id),
+    mutationKey: updateUserKey(admin._id),
   });
 
   return (
-    <TableRow key={admin.id}>
+    <TableRow key={admin._id}>
       <TableCell>
         <AdminProfileDialog admin={admin}>
           <button className="flex items-center space-x-3">
-            <Avatar src={admin.image} />
+            <Avatar src={admin.image || dummyUserImage} />
             <span className="text-base font-semibold">{admin.name}</span>
           </button>
         </AdminProfileDialog>

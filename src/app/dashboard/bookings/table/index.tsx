@@ -15,9 +15,18 @@ import { dummyUserImage } from "@/lib/constants";
 import { useAdminBookings } from "@/mutations/use-admin-booking";
 import { useTable } from "@/queries/use-table";
 import { useUser } from "@/queries/use-user";
-import { AlertCircle, Calendar, Check, Clock, XIcon } from "lucide-react";
+import {
+  AlertCircle,
+  Calendar,
+  Check,
+  Clock,
+  EllipsisVertical,
+  Loader2,
+  XIcon,
+} from "lucide-react";
 import moment from "moment";
 import Filter, { useFilters } from "./filter";
+import CancelBookingDropDown from "@/components/dropdowns/cancel-bookings-dropdown";
 
 const BookingsTable = () => {
   const filters = useFilters();
@@ -81,6 +90,7 @@ const BookingsTable = () => {
                 <TableHead className="min-w-[150px]">Date</TableHead>
                 <TableHead className="min-w-[150px]">Time</TableHead>
                 <TableHead className="min-w-[120px]">Status</TableHead>
+                <TableHead className="min-w-[120px]">Cancel</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -113,13 +123,14 @@ const BookingsTable = () => {
                   </TableCell>
                   <TableCell>
                     {booking.table ? (
-                      <div className="flex items-center gap-2">
-                        <span className="whitespace-nowrap font-medium">
+                      <div className="flex min-w-0 items-center">
+                        <div className="whitespace-nowrap font-medium">
                           {booking.table.attribute}
-                        </span>
-                        <span className="whitespace-nowrap text-sm text-gray-500">
+                        </div>
+
+                        <div className="whitespace-nowrap text-sm text-gray-500">
                           ({booking.table.tag})
-                        </span>
+                        </div>
                       </div>
                     ) : (
                       <span className="text-gray-500">No table assigned</span>
@@ -153,6 +164,14 @@ const BookingsTable = () => {
                       )}
                       {booking.isCancelled ? "Cancelled" : "Active"}
                     </div>
+                  </TableCell>
+
+                  <TableCell>
+                    <CancelBookingDropDown bookingId={booking?.id}>
+                      <button>
+                        <EllipsisVertical className="size-4 text-gray-900" />
+                      </button>
+                    </CancelBookingDropDown>
                   </TableCell>
                 </TableRow>
               ))}

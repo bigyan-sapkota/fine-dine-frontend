@@ -119,27 +119,26 @@ export default function Testimonial() {
           </Swiper>
         </div>
 
-        {/* swiper */}
         <div className="relative hidden h-[600px] w-full lg:block">
           <div>
             <img
               src="/about/cup.jpg"
               alt="cup"
-              className="absolute left-1/2 top-0 z-50 size-52 -translate-x-1/2 rounded-xl object-cover"
+              className="absolute left-1/2 top-0 z-20 size-52 -translate-x-1/2 rounded-xl object-cover"
             />
           </div>
           <div>
             <img
               src="/about/beef.jpg"
               alt="cup"
-              className="absolute left-28 top-28 z-40 size-64 rounded-xl"
+              className="absolute left-28 top-28 z-10 size-64 rounded-xl"
             />
           </div>
           <div>
             <img
               src="/about/cake.jpg"
               alt="cake"
-              className="absolute bottom-0 right-0 z-50 size-80 rounded-xl"
+              className="absolute bottom-0 right-0 z-20 size-80 rounded-xl"
             />
           </div>
         </div>

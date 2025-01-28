@@ -86,7 +86,7 @@ function BaseDialog() {
             Icon={User}
             id="name"
             label="Name"
-            placeholder="Ayushma Dhungana..."
+            placeholder="Your Name..."
             {...register("name")}
             error={errors.name?.message}
           />

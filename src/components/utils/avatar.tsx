@@ -28,11 +28,11 @@ export default function Avatar({
             "size-12": variant === "xl",
             "size-14": variant === "2xl",
           },
-          className
+          className,
         )}
       >
         <img
-          src={src}
+          src={src || "/no-img.jpg"}
           loading="lazy"
           decoding="async"
           alt="user avatar"

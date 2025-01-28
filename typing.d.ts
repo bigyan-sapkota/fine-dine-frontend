@@ -42,6 +42,7 @@ type User = {
   image: string | undefined;
   address: string | undefined;
   phone: string | undefined;
+  role: string;
 };
 
 export type UserProfile = User & {
@@ -62,7 +63,7 @@ type Table = {
   _id: string;
   tag: string;
   attribute: string;
-  capacity: numer;
+  capacity: number;
   available: boolean;
 };
 

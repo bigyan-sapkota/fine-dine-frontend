@@ -13,6 +13,7 @@ import { useProfile } from "@/queries/use-profile";
 import { Mail, User } from "lucide-react";
 import React from "react";
 import { openUpdateProfileDialog } from "./update-profile-dialog";
+import { dummyUserImage } from "@/lib/constants";
 
 export default function ProfileDialog({
   children,
@@ -30,9 +31,9 @@ export default function ProfileDialog({
         </DialogHeader>
 
         <section>
-          <Avatar src={profile.image} variant="xl" />
-          <p className="font-semibold">{profile.name}</p>
-          <div className="flex items-center">
+          <Avatar src={profile.image || dummyUserImage} variant="xl" />
+          <p className="mt-2 font-semibold">{profile.name}</p>
+          <div className="my-1.5 flex items-center">
             <Mail className="mr-2 size-4" /> <span>{profile.email}</span>
           </div>
           <div className="flex items-center">

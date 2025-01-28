@@ -1,5 +1,10 @@
 "use client";
-import { contact, navigationLinks, socialMedia } from "@/lib/constants";
+import {
+  contact,
+  dummyUserImage,
+  navigationLinks,
+  socialMedia,
+} from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useProfile } from "@/queries/use-profile";
 import Link from "next/link";
@@ -19,7 +24,7 @@ export default function Navbar() {
   return (
     <div
       className={cn(
-        "left-0 top-0 z-10 h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
+        "left-0 top-0 z-40 h-20 w-full border-b bg-white/70 filter backdrop-blur-2xl lg:h-32",
         {
           fixed: pathname === "/",
           sticky: pathname !== "/",
@@ -130,7 +135,7 @@ export default function Navbar() {
               <ProfileDropdown>
                 <button>
                   <Avatar
-                    src={profile.image}
+                    src={profile.image || dummyUserImage}
                     variant="lg"
                     className="rounded-full border-2 border-white p-0.5 shadow"
                   />

@@ -30,7 +30,6 @@ export const uploadImage = async (file: File): Promise<string> => {
     const { data } = await axios.post(
       `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_KEY}`,
     );
-    console.log(process.env.NEXT_PUBLIC_IMGBB_KEY);
     return data.data.display_url;
   } catch (error) {
     const message = `Could not upload image ! ${error instanceof Error ? error.message : ""}`;

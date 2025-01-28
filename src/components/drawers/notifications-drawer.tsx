@@ -46,11 +46,8 @@ export default function NotificationsDrawer({
               .fill("nothing")
               .map((_, i) => <div key={i}>{skeleton}</div>)}
 
-          {notifications.map((notification) => (
-            <NotificationCard
-              key={notification.id}
-              notification={notification}
-            />
+          {notifications.map((notification, i) => (
+            <NotificationCard key={i} notification={notification} />
           ))}
         </div>
       </DrawerContent>

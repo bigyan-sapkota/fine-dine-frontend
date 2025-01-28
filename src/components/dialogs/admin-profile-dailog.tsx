@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Dot, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import React from "react";
 import { UserProfile } from "../../../typing";
+import { dummyUserImage } from "@/lib/constants";
 
 type Props = { children: React.ReactNode; admin: UserProfile };
 
@@ -24,7 +25,7 @@ export default function AdminProfileDialog({ children, admin }: Props) {
         </DialogHeader>
 
         <section>
-          <Avatar src={admin.image} variant="xl" />
+          <Avatar src={admin.image || dummyUserImage} variant="xl" />
           <p className="font-semibold">{admin.name}</p>
           <div className="flex items-center">
             <Mail className="mr-2 size-4" /> <span>{admin.email}</span>
@@ -44,7 +45,7 @@ export default function AdminProfileDialog({ children, admin }: Props) {
           <div className="flex items-center">
             <Dot
               className={cn(
-                "mr-2 size-4 scale-150 animate-pulse text-green-600"
+                "mr-2 size-4 scale-150 animate-pulse text-green-600",
               )}
             />
             <span className="rounded-sm bg-green-600/20 px-2 text-green-600">

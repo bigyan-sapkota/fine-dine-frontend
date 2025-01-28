@@ -25,8 +25,12 @@ type Options = {
   startsAt: string;
   hours: number;
   userId: string;
+  successUrl: string; // Add successUrl here
+  cancelUrl: string; // Add cancelUrl here
 };
+
 const bookTable = async (data: Options): Promise<string> => {
+  console.log(data);
   try {
     const res = await axios.post<{ message: string }>(
       `${BACKEND_URL}/api/bookings`,

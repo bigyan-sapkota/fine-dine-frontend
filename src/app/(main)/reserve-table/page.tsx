@@ -26,6 +26,13 @@ import {
 import { AlertCircle, CalendarIcon, Loader2 } from "lucide-react";
 import moment from "moment";
 import Image from "next/image";
+import Link from "next/link";
+
+// Type for time slot
+interface TimeSlot {
+  label: string;
+  value: string;
+}
 
 const Page = () => {
   const { data: user } = useProfile();
@@ -33,34 +40,53 @@ const Page = () => {
 
   const [date, onChange] = useState<Date | undefined>(new Date());
   const [capacity, setCapacity] = useState<number>(1);
-  const [time, setTime] = useState(9);
+  const [selectedTime, setSelectedTime] = useState<string>("");
   const [selectedTables, setSelectedTables] = useState<string[] | null>(null);
 
+  // Generate time slots for the day (9 AM to 5 PM with 15-minute intervals)
+  const timeSlots: TimeSlot[] = useMemo(() => {
+    const slots: TimeSlot[] = [];
+    for (let hour = 9; hour < 18; hour++) {
+      for (let minute = 0; minute < 60; minute += 15) {
+        const isPM = hour >= 12;
+        const displayHour = hour % 12 || 12;
+        const timeValue = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+        const label = `${displayHour}:${minute.toString().padStart(2, "0")} ${isPM ? "PM" : "AM"}`;
+        slots.push({ label, value: timeValue });
+      }
+    }
+    return slots;
+  }, []);
+
   const fullDate = useMemo(() => {
-    const selectedDate = new Date(date?.toString() || Date.now());
-    const minutes = Math.round(time) > time ? 0.5 : 0;
-    selectedDate.setHours(time);
+    if (!date || !selectedTime) return new Date().toISOString();
+
+    const [hours, minutes] = selectedTime.split(":").map(Number);
+    const selectedDate = new Date(date);
+    selectedDate.setHours(hours);
     selectedDate.setMinutes(minutes);
     selectedDate.setSeconds(0);
     selectedDate.setMilliseconds(0);
     return selectedDate.toISOString();
-  }, [date, time]);
+  }, [date, selectedTime]);
 
   const { data: availableTables, isLoading: isAvailableTablesLoading } =
     useAvailableTables({
       date: fullDate,
       hours: 1,
-      tag: "first floor",
     });
 
   useEffect(() => {
     setSelectedTables(null);
   }, [availableTables, fullDate]);
 
-  const canSelectTable = date && time && capacity;
+  const canSelectTable = date && selectedTime && capacity;
   const isBookingTable = !!useIsMutating({ mutationKey: bookTableKey });
   const disabled =
-    !((selectedTables?.length || 0) > 0) || !time || !date || isBookingTable;
+    !((selectedTables?.length || 0) > 0) ||
+    !selectedTime ||
+    !date ||
+    isBookingTable;
 
   const checkTableSelection = (id: string) => {
     return selectedTables?.includes(id);
@@ -76,10 +102,29 @@ const Page = () => {
     setSelectedTables(updatedTables!);
   };
 
+  if (!user) {
+    return (
+      <div className="mt-14 flex items-center justify-center lg:mt-0 lg:h-96">
+        <div className="flex flex-col justify-center rounded-xl border p-6 shadow-md lg:p-10">
+          <h2 className="font-bold">Login to proceed</h2>
+          <p className="my-4">Only registered users can reserve table</p>
+          <Link href="/login" className="flex justify-center">
+            <Button variant="common">Log In</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="section-padding-x max-width section-padding-y flex flex-col bg-gray-100 lg:flex-row">
       <div className="hidden lg:block lg:w-1/2">
-        <Image src="/reserve-table/booking.svg" alt="reserve-table" />
+        <Image
+          src="/reserve-table/booking.svg"
+          width="600"
+          height="500"
+          alt="reserve-table"
+        />
       </div>
 
       <div className="rounded-xl border bg-white p-4 shadow lg:w-1/2 lg:p-10">
@@ -127,20 +172,16 @@ const Page = () => {
 
         <div className="mt-8 flex flex-col space-y-2">
           <Label>Select time</Label>
-          <Select
-            value={time.toString()}
-            onValueChange={(val) => setTime(Number(val) || 9)}
-          >
+          <Select value={selectedTime} onValueChange={setSelectedTime}>
             <SelectTrigger>
               <SelectValue placeholder="Select Time" />
             </SelectTrigger>
 
             <SelectContent>
               <SelectGroup>
-                {new Array(9).fill("nothing").map((_, i) => (
-                  <SelectItem key={i} value={(i + 9).toString()}>
-                    {(i + 9) % 12 || 12}
-                    {i + 9 >= 12 ? "pm" : "am"}
+                {timeSlots.map((slot) => (
+                  <SelectItem key={slot.value} value={slot.value}>
+                    {slot.label}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -185,7 +226,7 @@ const Page = () => {
                       height="64"
                       alt="table"
                     />
-                    <div className="rounded-lg bg-black px-2 py-0.5 text-center text-white">
+                    <div className="w-10 rounded-lg bg-black px-2 py-0.5 text-center text-white">
                       {table.attribute}
                     </div>
                     <div className="absolute -right-4 bottom-8">
@@ -219,9 +260,11 @@ const Page = () => {
             onClick={() =>
               mutate({
                 tableIds: selectedTables!,
-                startsAt: date?.toISOString() || "",
-                userId: user._id,
-                hours: time,
+                startsAt: fullDate,
+                userId: user?._id,
+                hours: parseInt(selectedTime.split(":")[0]),
+                successUrl: "https://www.google.com/",
+                cancelUrl: "https://www.google.com/",
               })
             }
           >

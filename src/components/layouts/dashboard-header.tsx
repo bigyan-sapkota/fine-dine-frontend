@@ -8,6 +8,7 @@ import DashboardMenuDrawer from "../drawers/dashboard-menu-drawer";
 import ProfileDropdown from "../dropdowns/profile-dropdown";
 import Avatar from "../utils/avatar";
 import { dashboardLinks } from "./dashboard-sidebar";
+import { dummyUserImage } from "@/lib/constants";
 
 export default function DashboardHeader() {
   const pathname = usePathname();
@@ -35,7 +36,7 @@ export default function DashboardHeader() {
 
         <ProfileDropdown>
           <button>
-            <Avatar src={profile.image} />
+            <Avatar src={profile.image || dummyUserImage} />
           </button>
         </ProfileDropdown>
       </div>

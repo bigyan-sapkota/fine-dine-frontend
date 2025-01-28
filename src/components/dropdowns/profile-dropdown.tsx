@@ -1,5 +1,12 @@
 import { useProfile } from "@/queries/use-profile";
-import { Bell, LogOut, NotebookPen, User } from "lucide-react";
+import {
+  Bell,
+  LayoutDashboard,
+  LifeBuoy,
+  LogOut,
+  NotebookPen,
+  User,
+} from "lucide-react";
 import LogoutDialog from "../dialogs/logout-dialog";
 import ProfileDialog from "../dialogs/profile-dialog";
 import NotificationsDrawer from "../drawers/notifications-drawer";
@@ -12,6 +19,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
+import Link from "next/link";
+import BookingHistory from "../dialogs/booking-history-dialog";
 
 type Props = { children: React.ReactNode };
 
@@ -36,6 +46,32 @@ export default function ProfileDropdown({ children }: Props) {
                 <span>Profile</span>
               </button>
             </ProfileDialog>
+          </DropdownMenuSubTrigger>
+        </DropdownMenuSub>
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="p-0 [&>svg]:hidden">
+            <ProfileDialog>
+              <Link
+                href="/dashboard"
+                className="flex w-full items-center px-2 py-1.5"
+              >
+                {/* <LayoutDashboard /> */}
+                <LayoutDashboard className="mr-2 size-4" />
+                <span>Dashboard</span>
+              </Link>
+            </ProfileDialog>
+          </DropdownMenuSubTrigger>
+        </DropdownMenuSub>
+
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger className="p-0 [&svg]:hidden">
+            <BookingHistory userId={profile?._id}>
+              <button className="flex w-full items-center px-2 py-1.5">
+                <LifeBuoy className="mr-2 size-4" />
+                <span>Booking History</span>
+              </button>
+            </BookingHistory>
           </DropdownMenuSubTrigger>
         </DropdownMenuSub>
 

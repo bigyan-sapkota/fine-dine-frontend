@@ -7,7 +7,7 @@ import { extractErrorMessage } from "@/lib/utils";
 type KeyOptions = {
   date: string | null;
   hours: number | null;
-  tag?: string | null;
+  tag?: string;
 };
 
 export const availableTableKeys = (options: KeyOptions) => [

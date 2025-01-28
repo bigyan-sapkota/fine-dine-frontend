@@ -24,6 +24,7 @@ import { UserProfile } from "../../../typing";
 import { Skeleton } from "../ui/skeleton";
 import Avatar from "../utils/avatar";
 import InfiniteScrollObserver from "../utils/infinite-scroll-observer";
+import { dummyUserImage } from "@/lib/constants";
 
 export default function AddAdminDialog({
   children,
@@ -34,7 +35,7 @@ export default function AddAdminDialog({
   const enabled = useDebounce(searchInput);
   const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useUsers({
     search: searchInput,
-    enabled,
+    enabled: !!enabled,
   });
   const users = data?.pages.flat(1) || [];
 
@@ -93,7 +94,7 @@ function User({ user }: { user: UserProfile }) {
   const { data: admins } = useAdmins();
 
   const isAddingAdmin = !!useIsMutating({
-    mutationKey: updateUserKey(user.id),
+    mutationKey: updateUserKey(user._id),
   });
 
   const addAdmin = () => {
@@ -105,7 +106,11 @@ function User({ user }: { user: UserProfile }) {
 
   return (
     <div className="flex items-center py-1 text-sm">
-      <Avatar src={user.image} className="mr-2" variant="sm" />
+      <Avatar
+        src={user.image || dummyUserImage}
+        className="mr-2"
+        variant="sm"
+      />
       <span className="font-semibold">{user.name}</span>
       <Button
         disabled={isAddingAdmin}
