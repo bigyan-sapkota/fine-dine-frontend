@@ -105,9 +105,9 @@ const Login = () => {
               >
                 Haven't registered yet? Register
               </Link>
-              <p className="custom-transition cursor-pointer text-sm font-semibold text-primary hover:text-black">
+              {/* <p className="custom-transition cursor-pointer text-sm font-semibold text-primary hover:text-black">
                 Forgot password?
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

@@ -43,12 +43,31 @@ const Page = () => {
   const [capacity, setCapacity] = useState<number>(1);
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [selectedTables, setSelectedTables] = useState<string[] | null>(null);
+  const [hours, setHours] = useState<number>(1);
 
   // Generate time slots for the day (9 AM to 5 PM with 15-minute intervals)
   const timeSlots: TimeSlot[] = useMemo(() => {
     const slots: TimeSlot[] = [];
+    const currentDate = new Date();
+    const selectedDate = date || currentDate;
+
+    // Check if the selected date is today
+    const isToday = selectedDate.toDateString() === currentDate.toDateString();
+
+    // Get current time plus 30 minutes
+    const currentHour = currentDate.getHours();
+    const currentMinute = currentDate.getMinutes();
+    const minTimeInMinutes = currentHour * 60 + currentMinute + 30;
+
     for (let hour = 9; hour < 18; hour++) {
       for (let minute = 0; minute < 60; minute += 15) {
+        const timeInMinutes = hour * 60 + minute;
+
+        // Skip times that are less than 30 minutes from now (only for today)
+        if (isToday && timeInMinutes <= minTimeInMinutes) {
+          continue;
+        }
+
         const isPM = hour >= 12;
         const displayHour = hour % 12 || 12;
         const timeValue = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
@@ -57,7 +76,7 @@ const Page = () => {
       }
     }
     return slots;
-  }, []);
+  }, [date]);
 
   const fullDate = useMemo(() => {
     if (!date || !selectedTime) return new Date().toISOString();
@@ -109,7 +128,7 @@ const Page = () => {
       tableIds: selectedTables!,
       startsAt: fullDate,
       userId: user?._id,
-      hours: parseInt(selectedTime.split(":")[0]),
+      hours: 1,
       successUrl: `${location.origin}`,
       cancelUrl: `${location.origin}`,
     });
@@ -167,22 +186,6 @@ const Page = () => {
           </Popover>
         </div>
 
-        <div className="mt-8 flex items-start justify-between gap-4">
-          <div className="flex w-full flex-col space-y-4">
-            <Label>Select Capacity</Label>
-            <Slider
-              defaultValue={[1]}
-              max={12}
-              step={1}
-              onValueChange={(values) => setCapacity(values[0])}
-              className="w-full"
-            />
-          </div>
-          <div className="flex size-8 items-center justify-center rounded-full bg-gray-300 p-2">
-            {capacity}
-          </div>
-        </div>
-
         <div className="mt-8 flex flex-col space-y-2">
           <Label>Select time</Label>
           <Select value={selectedTime} onValueChange={setSelectedTime}>
@@ -200,6 +203,40 @@ const Page = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+
+        {/* Capacity Slider */}
+        <div className="mt-8 flex flex-col space-y-2">
+          <Label>Number of People</Label>
+          <div className="flex flex-col space-y-2">
+            <Slider
+              min={1}
+              max={10}
+              step={1}
+              value={[capacity]}
+              onValueChange={(value) => setCapacity(value[0])}
+            />
+            <span className="text-sm text-gray-500">
+              Selected: {capacity} people
+            </span>
+          </div>
+        </div>
+
+        {/* Hours Slider */}
+        <div className="mt-8 flex flex-col space-y-2">
+          <Label>Duration (hours)</Label>
+          <div className="flex flex-col space-y-2">
+            <Slider
+              min={1}
+              max={4}
+              step={1}
+              value={[hours]}
+              onValueChange={(value) => setHours(value[0])}
+            />
+            <span className="text-sm text-gray-500">
+              Selected: {hours} hour(s)
+            </span>
+          </div>
         </div>
 
         <div className="mt-8 flex flex-col space-y-2">
@@ -229,7 +266,7 @@ const Page = () => {
               {availableTables?.map((table, i) => (
                 <div
                   key={i}
-                  className={`size-20 ${checkTableSelection(table._id) && "bg-gray-200"} cursor-pointer p-4`}
+                  className={`size-20 ${checkTableSelection(table._id) && "bg-secondary"} cursor-pointer p-4`}
                   onClick={() => tableClickHandler(table._id)}
                 >
                   <div className="relative">
@@ -239,8 +276,8 @@ const Page = () => {
                       height="64"
                       alt="table"
                     />
-                    <div className="w-10 rounded-lg bg-black px-2 py-0.5 text-center text-white">
-                      {table.attribute}
+                    <div className="w-10 rounded-lg bg-black px-1 py-0.5 text-center text-xs font-semibold text-white">
+                      Table
                     </div>
                     <div className="absolute -right-4 bottom-8">
                       <Image
@@ -249,7 +286,9 @@ const Page = () => {
                         height="30"
                         alt="chair"
                       />
-                      <div className="absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-primary text-sm text-white">
+                      <div
+                        className={`absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-primary text-sm text-white`}
+                      >
                         {table.capacity}
                       </div>
                     </div>
